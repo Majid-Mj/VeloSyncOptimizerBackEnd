@@ -1,11 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace VeloSyncOptimizer.Domain.Entities;
 
+[Table("RefreshTokens", Schema = "identity")]
 public class RefreshToken
 {
     public Guid Id { get; set; }
