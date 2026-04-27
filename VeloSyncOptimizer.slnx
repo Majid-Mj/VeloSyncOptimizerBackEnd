@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="VeloSyncOptimizer.API/VeloSyncOptimizer.API.csproj" Id="52e6748a-0349-4fc1-9fe6-779e0a7ce7a3" />
+  <Project Path="VeloSyncOptimizer.Application/VeloSyncOptimizer.Application.csproj" />
+  <Project Path="VeloSyncOptimizer.Domain/VeloSyncOptimizer.Domain.csproj" />
+  <Project Path="VeloSyncOptimizer.Infrastructure/VeloSyncOptimizer.Infrastructure.csproj" />
+</Solution>

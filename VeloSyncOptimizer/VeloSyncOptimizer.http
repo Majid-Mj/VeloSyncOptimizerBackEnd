@@ -1,0 +1,6 @@
+@VeloSyncOptimizer_HostAddress = http://localhost:5062
+
+GET {{VeloSyncOptimizer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
