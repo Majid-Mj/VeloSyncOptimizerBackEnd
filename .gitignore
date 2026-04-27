@@ -5,5 +5,5 @@ obj/
 *.suo
 *.log
 appsettings.Development.json
-appsettings.*.json
+appsettings.json
 !appsettings.js
