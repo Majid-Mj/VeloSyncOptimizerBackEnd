@@ -21,13 +21,12 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Services
         }
 
 
-        public string GenerateToken(Guid userId , string email , string role)
+        public string GenerateToken(Guid userId, int roleId)
         {
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                new Claim(ClaimTypes.Email, email),
-                new Claim(ClaimTypes.Role, role)
+                new Claim("RoleId", roleId.ToString())
             };
 
             var key = new SymmetricSecurityKey(
@@ -49,7 +48,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Services
         }
         public string GenerateRefreshToken()
         {
-            var randomNumber = new byte[32];
+            var randomNumber = new byte[64];
             using var rng = System.Security.Cryptography.RandomNumberGenerator.Create();
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);

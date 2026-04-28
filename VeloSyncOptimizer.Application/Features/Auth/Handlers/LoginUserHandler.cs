@@ -35,18 +35,9 @@ public class LoginUserHandler
             throw new UnauthorizedAccessException("Invalid email or password");
 
         // 3. Generate JWT via interface
-        var roleName = user.RoleId switch
-        {
-            1 => "Administrator",
-            2 => "WarehouseManager",
-            3 => "ProcurementOfficer",
-            _ => "User"
-        };
-
         var accessToken = _jwt.GenerateToken(
             user.Id,
-            user.Email,
-            roleName
+            user.RoleId
         );
 
         var refreshToken = _jwt.GenerateRefreshToken();
@@ -67,8 +58,7 @@ public class LoginUserHandler
         {
             Token = accessToken,
             RefreshToken = refreshToken,
-            Email = user.Email,
-            Role = roleName,
+            RoleId = user.RoleId,
             Expiry = DateTime.UtcNow.AddHours(2)
         };
     }

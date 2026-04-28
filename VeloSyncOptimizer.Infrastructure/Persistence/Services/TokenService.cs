@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,8 +18,8 @@ public class TokenService : ITokenService
         _jwt = jwt;
     }
 
-    public string GenerateAccessToken(Guid userId, string email, string role)
-        => _jwt.GenerateToken(userId, email, role);
+    public string GenerateAccessToken(Guid userId, int roleId)
+        => _jwt.GenerateToken(userId, roleId);
 
     public string GenerateRefreshToken()
     {
