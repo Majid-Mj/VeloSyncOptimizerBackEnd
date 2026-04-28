@@ -1,6 +1,7 @@
 
 using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces;
+using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Features.Auth.Commands;
 using VeloSyncOptimizer.Infrastructure.Persistence.Models;
 

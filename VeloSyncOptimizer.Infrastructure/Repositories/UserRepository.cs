@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Domain.Entities;
 
 namespace VeloSyncOptimizer.Infrastructure.Persistence.Repositories;
