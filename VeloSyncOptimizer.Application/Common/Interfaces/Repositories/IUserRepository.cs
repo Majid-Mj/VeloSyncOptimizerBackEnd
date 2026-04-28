@@ -1,8 +1,6 @@
-
-
 using VeloSyncOptimizer.Infrastructure.Persistence.Models;
 
-namespace VeloSyncOptimizer.Application.Common.Interfaces
+namespace VeloSyncOptimizer.Application.Common.Interfaces.Repositories
 {
 
     public interface IUserRepository
@@ -10,6 +8,6 @@ namespace VeloSyncOptimizer.Application.Common.Interfaces
         Task<User?> GetByEmailAsync(string email, CancellationToken ct);
         Task<bool> ExistsByEmailAsync(string email, CancellationToken ct);
         Task<Guid> CreateAsync(User user, CancellationToken ct);
-        Task SaveRefreshTokenAsync(VeloSyncOptimizer.Domain.Entities.RefreshToken token, CancellationToken ct);
+        Task SaveRefreshTokenAsync(Domain.Entities.RefreshToken token, CancellationToken ct);
     }
 }

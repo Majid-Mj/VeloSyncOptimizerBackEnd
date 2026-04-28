@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Auth\Handlers\**" />
+    <EmbeddedResource Remove="Features\Auth\Handlers\**" />
+    <None Remove="Features\Auth\Handlers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
     <PackageReference Include="MediatR" Version="14.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
@@ -15,10 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VeloSyncOptimizer.Domain\VeloSyncOptimizer.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Auth\Handlers\" />
   </ItemGroup>
 
 </Project>
