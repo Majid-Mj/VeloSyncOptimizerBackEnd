@@ -16,12 +16,6 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
-        // 🔹 Map interface → DbContext abstraction
-        // services.AddScoped<IAppDbContext>(sp =>
-        //    sp.GetRequiredService<AppDbContext>());
-
-        // 🔹 Dapper connection
-        // services.AddScoped<IDbConnectionFactory, SqlConnectionFactory>();
 
         // 🔹 Query (Read)
         services.AddScoped<IUserRepository, UserRepository>();
