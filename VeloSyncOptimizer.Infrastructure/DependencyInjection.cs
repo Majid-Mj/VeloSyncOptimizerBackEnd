@@ -5,6 +5,7 @@ using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
 using VeloSyncOptimizer.Infrastructure.Persistence.Repositories;
 using VeloSyncOptimizer.Infrastructure.Persistence.Services;
+using VeloSyncOptimizer.Infrastructure.Repositories;
 
 namespace VeloSyncOptimizer.Infrastructure;
 
@@ -25,6 +26,7 @@ public static class DependencyInjection
 
         // 🔹 Query (Read)
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IWarehouseRepository, WarehouseRepository>();
         
         // Services
         services.AddScoped<IJwtService, JwtService>();
