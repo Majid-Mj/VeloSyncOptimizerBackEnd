@@ -1,17 +1,17 @@
 using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
-using VeloSyncOptimizer.Application.Features.Auth.Commands;
+
 using VeloSyncOptimizer.Infrastructure.Persistence.Models;
 
-namespace VeloSyncOptimizer.Application.Features.Auth.Handlers;
+namespace VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
 
-public class CreateUserHandler : IRequestHandler<CreateUserCommand, Guid>
+public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
 {
     private readonly IUserRepository _userRepo;
     private readonly IPasswordService _password;
 
-    public CreateUserHandler(
+    public CreateUserCommandHandler(
         IUserRepository userRepo,
         IPasswordService password)
     {

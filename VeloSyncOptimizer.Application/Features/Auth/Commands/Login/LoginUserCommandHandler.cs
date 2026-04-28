@@ -1,12 +1,13 @@
 
 using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces;
-using VeloSyncOptimizer.Application.Features.Auth.Commands;
+using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
+
 using VeloSyncOptimizer.Application.Features.Auth.DTOs;
 
-namespace VeloSyncOptimizer.Application.Features.Auth.Handlers;
+namespace VeloSyncOptimizer.Application.Features.Auth.Commands.Login;
 
-public class LoginUserHandler
+public class LoginUserCommandHandler
     : IRequestHandler<LoginUserCommand, AuthResponseDto>
 {
     // ✅ Only interfaces — no EF Core, no Dapper, no AppDbContext
@@ -14,7 +15,7 @@ public class LoginUserHandler
     private readonly IPasswordService _password;
     private readonly IJwtService _jwt;
 
-    public LoginUserHandler(
+    public LoginUserCommandHandler(
         IUserRepository userRepo,
         IPasswordService password,
         IJwtService jwt)

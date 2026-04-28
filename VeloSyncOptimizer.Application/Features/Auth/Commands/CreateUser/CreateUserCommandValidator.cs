@@ -1,0 +1,15 @@
+using FluentValidation;
+
+namespace VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
+
+public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+{
+    public CreateUserCommandValidator()
+    {
+        RuleFor(v => v.Email).NotEmpty().EmailAddress();
+        RuleFor(v => v.Password).NotEmpty().MinimumLength(6);
+        RuleFor(v => v.FirstName).NotEmpty();
+        RuleFor(v => v.LastName).NotEmpty();
+        RuleFor(v => v.RoleId).NotEmpty();
+    }
+}
