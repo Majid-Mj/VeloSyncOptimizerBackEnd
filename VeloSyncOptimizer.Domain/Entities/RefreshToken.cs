@@ -16,6 +16,9 @@ public class RefreshToken
 
     public string Token { get; set; }
 
+    public string UserName { get; set; } = string.Empty;
+    public int RoleId { get; set; }
+
     public DateTime ExpiresAt { get; set; }
     public bool IsRevoked { get; set; }
 

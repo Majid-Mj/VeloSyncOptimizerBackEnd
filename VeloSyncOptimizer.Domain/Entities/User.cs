@@ -1,14 +1,15 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using VeloSyncOptimizer.Domain.Entities.Common;
 
 namespace VeloSyncOptimizer.Infrastructure.Persistence.Models;
 
 [Table("Users", Schema = "identity")]
 [Index("Email", Name = "UQ_Users_Email", IsUnique = true)]
-public partial class User
+public partial class User : BaseEntity
 {
     [Key]
     public Guid Id { get; set; }

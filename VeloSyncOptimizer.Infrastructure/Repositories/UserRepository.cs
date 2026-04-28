@@ -22,22 +22,15 @@ public class UserRepository : IUserRepository
 
 
     public async Task<User?> GetByEmailAsync(string email, CancellationToken ct)
-    {   
-
-        using var conn = new SqlConnection(_db.Database.GetConnectionString());
-        return await conn.QueryFirstOrDefaultAsync<User>(
-            "identity.sp_GetUserByEmail",
-             new { Email = email },
-              commandType: CommandType.StoredProcedure
-              );
+    {
+        return await _db.Users
+            .FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted, ct);
     }
 
     public async Task<bool> ExistsByEmailAsync(string email, CancellationToken ct)
     {
-        using var conn = new SqlConnection(_db.Database.GetConnectionString());
-        return await conn.ExecuteScalarAsync<bool>("identity.sp_UserExistsByEmail", new { Email = email },
-        commandType: CommandType.StoredProcedure
-        );
+        return await _db.Users
+            .AnyAsync(u => u.Email == email && !u.IsDeleted, ct);
     }
 
     public async Task<Guid> CreateAsync(User user, CancellationToken ct)

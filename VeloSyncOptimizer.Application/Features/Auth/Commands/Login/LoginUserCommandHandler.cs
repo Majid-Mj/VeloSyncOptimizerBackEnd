@@ -49,6 +49,8 @@ public class LoginUserCommandHandler
             Id = Guid.NewGuid(),
             UserId = user.Id,
             Token = refreshToken,
+            UserName = user.FirstName + " " + user.LastName,
+            RoleId = user.RoleId,
             ExpiresAt = DateTime.UtcNow.AddDays(7),
             IsRevoked = false,
             CreatedAt = DateTime.UtcNow
