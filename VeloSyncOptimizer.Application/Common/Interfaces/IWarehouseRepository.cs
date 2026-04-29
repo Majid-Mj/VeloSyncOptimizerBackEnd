@@ -13,4 +13,6 @@ public interface IWarehouseRepository
 
 
     Task<WarehouseDto?> GetByIdAsync(Guid id, CancellationToken ct);
+
+    Task<bool> UpdateAsync(WarehouseDto warehouse, CancellationToken ct);
 }

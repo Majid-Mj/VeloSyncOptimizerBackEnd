@@ -81,4 +81,27 @@ public class WarehouseRepository : IWarehouseRepository
             commandType: CommandType.StoredProcedure
         );
     }
+
+    public async Task<bool> UpdateAsync(WarehouseDto warehouse, CancellationToken ct)
+    {
+        using var conn = new SqlConnection(_db.Database.GetConnectionString());
+
+        var rows = await conn.ExecuteAsync(
+            "inventory.sp_UpdateWarehouse",
+            new
+            {
+                warehouse.Id,
+                warehouse.Code,
+                warehouse.Name,
+                warehouse.City,
+                warehouse.State,
+                warehouse.Country,
+                warehouse.TotalCapacity,
+                warehouse.IsActive
+            },
+            commandType: CommandType.StoredProcedure
+        );
+
+        return rows > 0;
+    }
 }

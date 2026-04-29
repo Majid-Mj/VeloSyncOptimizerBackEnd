@@ -63,5 +63,36 @@ public class WarehousesController : ControllerBase
     }
 
 
+    [Authorize(Roles = "Administrator")]
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(
+    Guid id,
+    UpdateWarehouseRequestDto dto,
+    CancellationToken ct)
+    {
+        var command = new UpdateWarehouseCommand(
+            id,
+            dto.Code,
+            dto.Name,
+            dto.City,
+            dto.State,
+            dto.Country,
+            dto.TotalCapacity,
+            dto.IsActive
+        );
+
+        var result = await _mediator.Send(command, ct);
+
+        if (!result)
+            return NotFound(
+                ResponseFactory.Failure<object>("Warehouse not found or not updated")
+            );
+
+        return Ok(
+            ResponseFactory.Success<object>(null, "Warehouse updated successfully")
+        );
+    }
+
+
 }
 
