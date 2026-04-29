@@ -10,4 +10,7 @@ public interface IWarehouseRepository
 
     // ── Commands (EF Core) ────────────────────────────────────────────────
     Task<Guid> CreateAsync(CreateWarehouseCommand command, CancellationToken ct);
+
+
+    Task<WarehouseDto?> GetByIdAsync(Guid id, CancellationToken ct);
 }

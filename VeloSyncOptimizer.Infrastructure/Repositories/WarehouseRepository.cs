@@ -1,12 +1,13 @@
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse;
 using VeloSyncOptimizer.Application.Features.Warehouses.DTOs;
+using VeloSyncOptimizer.Domain.Entities;
 using VeloSyncOptimizer.Infrastructure.Dapper.Queries;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
-using VeloSyncOptimizer.Domain.Entities;
 
 namespace VeloSyncOptimizer.Infrastructure.Repositories;
 
@@ -44,27 +45,40 @@ public class WarehouseRepository : IWarehouseRepository
     {
         var warehouse = new Warehouse
         {
-            Id            = Guid.NewGuid(),
-            Code          = command.Code,
-            Name          = command.Name,
-            AddressLine1  = command.AddressLine1,
-            City          = command.City,
-            State         = command.State,
-            Country       = command.Country,
-            PostalCode    = command.PostalCode,
-            Latitude      = command.Latitude,
-            Longitude     = command.Longitude,
+            Id = Guid.NewGuid(),
+            Code = command.Code,
+            Name = command.Name,
+            AddressLine1 = command.AddressLine1,
+            City = command.City,
+            State = command.State,
+            Country = command.Country,
+            PostalCode = command.PostalCode,
+            Latitude = command.Latitude,
+            Longitude = command.Longitude,
             TotalCapacity = command.TotalCapacity,
-            ManagerId     = command.ManagerId,
-            IsActive      = true,
-            IsDeleted     = false,
-            CreatedAt     = DateTime.UtcNow,
-            UpdatedAt     = DateTime.UtcNow
+            ManagerId = command.ManagerId,
+            IsActive = true,
+            IsDeleted = false,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
         };
 
         _db.Warehouses.Add(warehouse);
         await _db.SaveChangesAsync(ct);
 
         return warehouse.Id;
+    }
+
+
+
+    public async Task<WarehouseDto?> GetByIdAsync(Guid id, CancellationToken ct)
+    {
+        using var conn = new SqlConnection(_db.Database.GetConnectionString());
+
+        return await conn.QueryFirstOrDefaultAsync<WarehouseDto>(
+            "inventory.sp_GetWarehouseById",
+            new { Id = id },
+            commandType: CommandType.StoredProcedure
+        );
     }
 }

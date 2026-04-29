@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VeloSyncOptimizer.Application.Common.Helpers;
 using VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse;
+using VeloSyncOptimizer.Application.Features.Warehouses.DTOs;
 using VeloSyncOptimizer.Application.Features.Warehouses.Queries.GetAllWarehouses;
 
 namespace VeloSyncOptimizer.API.Controllers;
@@ -43,5 +44,24 @@ public class WarehousesController : ControllerBase
         var id = await _mediator.Send(command, cancellationToken);
         return Ok(ResponseFactory.Success(new { id }, "Warehouse created successfully"));
     }
+
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
+    {
+        var result = await _mediator.Send(
+            new GetWarehouseByIdQuery(id), ct);
+
+        if (result == null)
+            return NotFound(
+                ResponseFactory.Failure<WarehouseDto>("Warehouse not found")
+            );
+
+        return Ok(
+            ResponseFactory.Success(result, "Warehouse retrieved successfully")
+        );
+    }
+
+
 }
 
