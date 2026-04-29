@@ -21,12 +21,12 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Services
         }
 
 
-        public string GenerateToken(Guid userId, int roleId)
+        public string GenerateToken(Guid userId, string roleName)
         {
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                new Claim("RoleId", roleId.ToString())
+                new Claim(ClaimTypes.Role, roleName)
             };
 
             var key = new SymmetricSecurityKey(

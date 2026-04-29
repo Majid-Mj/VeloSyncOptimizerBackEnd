@@ -18,11 +18,6 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
-<<<<<<< HEAD
-=======
-            
->>>>>>> origin/main
-
         // 🔹 Query (Read)
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IWarehouseRepository, WarehouseRepository>();

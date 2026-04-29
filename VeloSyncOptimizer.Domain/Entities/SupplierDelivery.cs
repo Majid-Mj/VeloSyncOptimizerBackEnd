@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace VeloSyncOptimizer.Infrastructure.Persistence.Models;
+namespace VeloSyncOptimizer.Domain.Entities;
 
 [Table("SupplierDeliveries", Schema = "procurement")]
 [Index("PurchaseOrderId", Name = "IX_Deliveries_PO")]

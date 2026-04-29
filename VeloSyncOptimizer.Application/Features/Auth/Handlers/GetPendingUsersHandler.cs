@@ -1,6 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces;
+using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Features.Users.DTOs;
+using VeloSyncOptimizer.Application.Features.Auth.Queries;
+
+namespace VeloSyncOptimizer.Application.Features.Auth.Handlers;
 
 public class GetPendingUsersHandler
     : IRequestHandler<GetPendingUsersQuery, List<UserDto>>

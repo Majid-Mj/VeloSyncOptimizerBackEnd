@@ -1,7 +1,11 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VeloSyncOptimizer.Application.Common.Helpers;
 using VeloSyncOptimizer.Application.Features.Auth.Commands;
+using VeloSyncOptimizer.Application.Features.Auth.Queries;
+
+namespace VeloSyncOptimizer.API.Controllers;
 
 [ApiController]
 [Route("api/users")]
@@ -20,7 +24,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> GetPending(CancellationToken ct)
     {
         var result = await _mediator.Send(new GetPendingUsersQuery(), ct);
-        return Ok(result);
+        return Ok(ResponseFactory.Success(result, "Pending users retrieved successfully"));
     }
 
 
@@ -29,6 +33,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Approve(Guid id, CancellationToken ct)
     {
         await _mediator.Send(new ApproveUserCommand(id), ct);
-        return Ok("User approved successfully");
+        return Ok(ResponseFactory.Success(new { id }, "User approved successfully"));
     }
 }
+

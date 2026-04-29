@@ -1,6 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces;
+using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Features.Auth.Commands;
+using VeloSyncOptimizer.Domain.Entities;
+
+namespace VeloSyncOptimizer.Application.Features.Auth.Handlers;
 
 public class ApproveUserHandler : IRequestHandler<ApproveUserCommand>
 {

@@ -7,18 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Features\Auth\Handlers\**" />
-    <EmbeddedResource Remove="Features\Auth\Handlers\**" />
-    <None Remove="Features\Auth\Handlers\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
-<<<<<<< HEAD
-    <PackageReference Include="FluentValidation" Version="8.0.0" />
-=======
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
->>>>>>> origin/main
     <PackageReference Include="MediatR" Version="14.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />

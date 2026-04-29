@@ -1,6 +1,5 @@
 using VeloSyncOptimizer.Application.Features.Users.DTOs;
 using VeloSyncOptimizer.Domain.Entities;
-using VeloSyncOptimizer.Infrastructure.Persistence.Models;
 
 namespace VeloSyncOptimizer.Application.Common.Interfaces.Repositories
 {

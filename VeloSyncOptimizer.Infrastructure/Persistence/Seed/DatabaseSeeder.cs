@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
-using VeloSyncOptimizer.Infrastructure.Persistence.Models;
+using VeloSyncOptimizer.Domain.Entities;
 
 namespace VeloSyncOptimizer.Infrastructure.Persistence.Seed;
 
@@ -46,6 +46,7 @@ public static class DatabaseSeeder
                 LastName = "Administrator",
                 RoleId = 1,
                 IsActive = true,
+                IsApproved = true,
                 IsDeleted = false,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
@@ -58,6 +59,7 @@ public static class DatabaseSeeder
             // Ensure Admin password and status are correct
             adminUser.PasswordHash = passwordService.Hash("Admin@123");
             adminUser.IsActive = true;
+            adminUser.IsApproved = true;
             adminUser.IsDeleted = false;
             adminUser.UpdatedAt = DateTime.UtcNow;
             context.Users.Update(adminUser);

@@ -6,7 +6,7 @@ using VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse
 using VeloSyncOptimizer.Application.Features.Warehouses.DTOs;
 using VeloSyncOptimizer.Infrastructure.Dapper.Queries;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
-using VeloSyncOptimizer.Infrastructure.Persistence.Models;
+using VeloSyncOptimizer.Domain.Entities;
 
 namespace VeloSyncOptimizer.Infrastructure.Repositories;
 

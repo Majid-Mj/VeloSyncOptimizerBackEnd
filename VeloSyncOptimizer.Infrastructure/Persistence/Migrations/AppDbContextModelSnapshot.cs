@@ -22,41 +22,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.RefreshToken", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ExpiresAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRevoked")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RefreshTokens", "identity");
-                });
-
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.AlertSeverity", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.AlertSeverity", b =>
                 {
                     b.Property<byte>("Id")
                         .HasColumnType("tinyint");
@@ -71,7 +37,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("AlertSeverities", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.AuditLog", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.AuditLog", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,7 +89,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("AuditLogs", "audit");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Category", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,7 +127,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("Categories", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.MovementType", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.MovementType", b =>
                 {
                     b.Property<byte>("Id")
                         .HasColumnType("tinyint");
@@ -179,7 +145,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("MovementTypes", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Product", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -276,7 +242,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("Products", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrder", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.PurchaseOrder", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -350,7 +316,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("PurchaseOrders", "procurement");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrderLine", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.PurchaseOrderLine", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -390,7 +356,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("PurchaseOrderLines", "procurement");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrderStatus", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.PurchaseOrderStatus", b =>
                 {
                     b.Property<byte>("Id")
                         .HasColumnType("tinyint");
@@ -409,7 +375,41 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("PurchaseOrderStatuses", "procurement");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.ReorderSuggestion", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RefreshTokens", "identity");
+                });
+
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.ReorderSuggestion", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -468,7 +468,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("ReorderSuggestions", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.StockAlert", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.StockAlert", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -523,7 +523,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("StockAlerts", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.StockLevel", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.StockLevel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -578,7 +578,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("StockLevels", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.StockMovement", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.StockMovement", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -633,7 +633,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("StockMovements", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Supplier", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Supplier", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -671,7 +671,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("Suppliers", "procurement");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.SupplierDelivery", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.SupplierDelivery", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -724,7 +724,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("SupplierDeliveries", "procurement");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.User", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -753,6 +753,9 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -792,7 +795,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("Users", "identity");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.UserRole", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.UserRole", b =>
                 {
                     b.Property<byte>("Id")
                         .HasColumnType("tinyint");
@@ -810,7 +813,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("UserRoles", "identity");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.VelocityCache", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.VelocityCache", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -853,7 +856,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("VelocityCache", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Warehouse", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -936,7 +939,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("Warehouses", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.WarehouseTransfer", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.WarehouseTransfer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1015,9 +1018,9 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.ToTable("WarehouseTransfers", "inventory");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.AuditLog", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.AuditLog", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.User", "User")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.User", "User")
                         .WithMany("AuditLogs")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Audit_User");
@@ -1025,9 +1028,9 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Category", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Category", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Category", "Parent")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Category", "Parent")
                         .WithMany("InverseParent")
                         .HasForeignKey("ParentId")
                         .HasConstraintName("FK_Categories_Parent");
@@ -1035,14 +1038,14 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Product", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Category", "Category")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .HasConstraintName("FK_Products_Category");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Supplier", "Supplier")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Supplier", "Supplier")
                         .WithMany("Products")
                         .HasForeignKey("SupplierId")
                         .HasConstraintName("FK_Products_Supplier");
@@ -1052,31 +1055,31 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrder", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.PurchaseOrder", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.User", "ApprovedByUser")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.User", "ApprovedByUser")
                         .WithMany("PurchaseOrderApprovedByUsers")
                         .HasForeignKey("ApprovedByUserId")
                         .HasConstraintName("FK_PO_ApprovedBy");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.User", "CreatedByUser")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.User", "CreatedByUser")
                         .WithMany("PurchaseOrderCreatedByUsers")
                         .HasForeignKey("CreatedByUserId")
                         .HasConstraintName("FK_PO_CreatedBy");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrderStatus", "Status")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.PurchaseOrderStatus", "Status")
                         .WithMany("PurchaseOrders")
                         .HasForeignKey("StatusId")
                         .IsRequired()
                         .HasConstraintName("FK_PO_Status");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Supplier", "Supplier")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Supplier", "Supplier")
                         .WithMany("PurchaseOrders")
                         .HasForeignKey("SupplierId")
                         .IsRequired()
                         .HasConstraintName("FK_PO_Supplier");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", "Warehouse")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Warehouse", "Warehouse")
                         .WithMany("PurchaseOrders")
                         .HasForeignKey("WarehouseId")
                         .IsRequired()
@@ -1093,15 +1096,15 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrderLine", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.PurchaseOrderLine", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Product", "Product")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Product", "Product")
                         .WithMany("PurchaseOrderLines")
                         .HasForeignKey("ProductId")
                         .IsRequired()
                         .HasConstraintName("FK_POLines_Product");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrder", "PurchaseOrder")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.PurchaseOrder", "PurchaseOrder")
                         .WithMany("PurchaseOrderLines")
                         .HasForeignKey("PurchaseOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1113,26 +1116,26 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("PurchaseOrder");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.ReorderSuggestion", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.ReorderSuggestion", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Product", "Product")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Product", "Product")
                         .WithMany("ReorderSuggestions")
                         .HasForeignKey("ProductId")
                         .IsRequired()
                         .HasConstraintName("FK_Reorder_Product");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrder", "PurchaseOrder")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.PurchaseOrder", "PurchaseOrder")
                         .WithMany("ReorderSuggestions")
                         .HasForeignKey("PurchaseOrderId")
                         .HasConstraintName("FK_Reorder_PO");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.AlertSeverity", "Severity")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.AlertSeverity", "Severity")
                         .WithMany("ReorderSuggestions")
                         .HasForeignKey("SeverityId")
                         .IsRequired()
                         .HasConstraintName("FK_Reorder_Severity");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", "Warehouse")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Warehouse", "Warehouse")
                         .WithMany("ReorderSuggestions")
                         .HasForeignKey("WarehouseId")
                         .IsRequired()
@@ -1147,26 +1150,26 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.StockAlert", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.StockAlert", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Product", "Product")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Product", "Product")
                         .WithMany("StockAlerts")
                         .HasForeignKey("ProductId")
                         .IsRequired()
                         .HasConstraintName("FK_Alerts_Product");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.User", "ReadByUser")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.User", "ReadByUser")
                         .WithMany("StockAlerts")
                         .HasForeignKey("ReadByUserId")
                         .HasConstraintName("FK_Alerts_ReadBy");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.AlertSeverity", "Severity")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.AlertSeverity", "Severity")
                         .WithMany("StockAlerts")
                         .HasForeignKey("SeverityId")
                         .IsRequired()
                         .HasConstraintName("FK_Alerts_Severity");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", "Warehouse")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Warehouse", "Warehouse")
                         .WithMany("StockAlerts")
                         .HasForeignKey("WarehouseId")
                         .IsRequired()
@@ -1181,15 +1184,15 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.StockLevel", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.StockLevel", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Product", "Product")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Product", "Product")
                         .WithMany("StockLevels")
                         .HasForeignKey("ProductId")
                         .IsRequired()
                         .HasConstraintName("FK_StockLevels_Product");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", "Warehouse")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Warehouse", "Warehouse")
                         .WithMany("StockLevels")
                         .HasForeignKey("WarehouseId")
                         .IsRequired()
@@ -1200,26 +1203,26 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.StockMovement", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.StockMovement", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.User", "CreatedByUser")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.User", "CreatedByUser")
                         .WithMany("StockMovements")
                         .HasForeignKey("CreatedByUserId")
                         .HasConstraintName("FK_StockMov_User");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.MovementType", "MovementType")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.MovementType", "MovementType")
                         .WithMany("StockMovements")
                         .HasForeignKey("MovementTypeId")
                         .IsRequired()
                         .HasConstraintName("FK_StockMov_Type");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Product", "Product")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Product", "Product")
                         .WithMany("StockMovements")
                         .HasForeignKey("ProductId")
                         .IsRequired()
                         .HasConstraintName("FK_StockMov_Product");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", "Warehouse")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Warehouse", "Warehouse")
                         .WithMany("StockMovements")
                         .HasForeignKey("WarehouseId")
                         .IsRequired()
@@ -1234,15 +1237,15 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.SupplierDelivery", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.SupplierDelivery", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrder", "PurchaseOrder")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.PurchaseOrder", "PurchaseOrder")
                         .WithMany("SupplierDeliveries")
                         .HasForeignKey("PurchaseOrderId")
                         .IsRequired()
                         .HasConstraintName("FK_Deliveries_PO");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Supplier", "Supplier")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Supplier", "Supplier")
                         .WithMany("SupplierDeliveries")
                         .HasForeignKey("SupplierId")
                         .IsRequired()
@@ -1253,9 +1256,9 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.User", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.User", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.UserRole", "Role")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.UserRole", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .IsRequired()
@@ -1264,15 +1267,15 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.VelocityCache", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.VelocityCache", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Product", "Product")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Product", "Product")
                         .WithMany("VelocityCaches")
                         .HasForeignKey("ProductId")
                         .IsRequired()
                         .HasConstraintName("FK_Velocity_Product");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", "Warehouse")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Warehouse", "Warehouse")
                         .WithMany("VelocityCaches")
                         .HasForeignKey("WarehouseId")
                         .IsRequired()
@@ -1283,9 +1286,9 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Warehouse", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.User", "Manager")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.User", "Manager")
                         .WithMany("Warehouses")
                         .HasForeignKey("ManagerId")
                         .HasConstraintName("FK_Warehouses_Manager");
@@ -1293,36 +1296,36 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.WarehouseTransfer", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.WarehouseTransfer", b =>
                 {
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.StockMovement", "DestMovement")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.StockMovement", "DestMovement")
                         .WithMany("WarehouseTransferDestMovements")
                         .HasForeignKey("DestMovementId")
                         .HasConstraintName("FK_Transfers_DstMovement");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", "DestWarehouse")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Warehouse", "DestWarehouse")
                         .WithMany("WarehouseTransferDestWarehouses")
                         .HasForeignKey("DestWarehouseId")
                         .IsRequired()
                         .HasConstraintName("FK_Transfers_Dest");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.User", "InitiatedByUser")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.User", "InitiatedByUser")
                         .WithMany("WarehouseTransfers")
                         .HasForeignKey("InitiatedByUserId")
                         .HasConstraintName("FK_Transfers_User");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Product", "Product")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Product", "Product")
                         .WithMany("WarehouseTransfers")
                         .HasForeignKey("ProductId")
                         .IsRequired()
                         .HasConstraintName("FK_Transfers_Product");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.StockMovement", "SourceMovement")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.StockMovement", "SourceMovement")
                         .WithMany("WarehouseTransferSourceMovements")
                         .HasForeignKey("SourceMovementId")
                         .HasConstraintName("FK_Transfers_SrcMovement");
 
-                    b.HasOne("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", "SourceWarehouse")
+                    b.HasOne("VeloSyncOptimizer.Domain.Entities.Warehouse", "SourceWarehouse")
                         .WithMany("WarehouseTransferSourceWarehouses")
                         .HasForeignKey("SourceWarehouseId")
                         .IsRequired()
@@ -1341,26 +1344,26 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("SourceWarehouse");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.AlertSeverity", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.AlertSeverity", b =>
                 {
                     b.Navigation("ReorderSuggestions");
 
                     b.Navigation("StockAlerts");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Category", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Category", b =>
                 {
                     b.Navigation("InverseParent");
 
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.MovementType", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.MovementType", b =>
                 {
                     b.Navigation("StockMovements");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Product", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Product", b =>
                 {
                     b.Navigation("PurchaseOrderLines");
 
@@ -1377,7 +1380,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("WarehouseTransfers");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrder", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.PurchaseOrder", b =>
                 {
                     b.Navigation("PurchaseOrderLines");
 
@@ -1386,19 +1389,19 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("SupplierDeliveries");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.PurchaseOrderStatus", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.PurchaseOrderStatus", b =>
                 {
                     b.Navigation("PurchaseOrders");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.StockMovement", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.StockMovement", b =>
                 {
                     b.Navigation("WarehouseTransferDestMovements");
 
                     b.Navigation("WarehouseTransferSourceMovements");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Supplier", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Supplier", b =>
                 {
                     b.Navigation("Products");
 
@@ -1407,7 +1410,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("SupplierDeliveries");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.User", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.User", b =>
                 {
                     b.Navigation("AuditLogs");
 
@@ -1424,12 +1427,12 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
                     b.Navigation("Warehouses");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.UserRole", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.UserRole", b =>
                 {
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("VeloSyncOptimizer.Infrastructure.Persistence.Models.Warehouse", b =>
+            modelBuilder.Entity("VeloSyncOptimizer.Domain.Entities.Warehouse", b =>
                 {
                     b.Navigation("PurchaseOrders");
 

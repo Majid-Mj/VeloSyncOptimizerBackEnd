@@ -3,7 +3,7 @@ using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 
-using VeloSyncOptimizer.Infrastructure.Persistence.Models;
+using VeloSyncOptimizer.Domain.Entities;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands.Register;
 

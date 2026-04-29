@@ -8,7 +8,7 @@ namespace VeloSyncOptimizer.Application.Common.Interfaces;
 
 public interface ITokenService
 {
-    string GenerateAccessToken(Guid userId, int roleId);
+    string GenerateAccessToken(Guid userId, string roleName);
     string GenerateRefreshToken();
 }
 

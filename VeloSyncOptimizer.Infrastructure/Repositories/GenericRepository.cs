@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
