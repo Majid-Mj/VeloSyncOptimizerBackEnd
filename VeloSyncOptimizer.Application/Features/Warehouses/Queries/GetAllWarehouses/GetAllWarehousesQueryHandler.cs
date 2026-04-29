@@ -1,5 +1,5 @@
 using MediatR;
-using VeloSyncOptimizer.Application.Common.Interfaces;
+using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Features.Warehouses.DTOs;
 
 namespace VeloSyncOptimizer.Application.Features.Warehouses.Queries.GetAllWarehouses;

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 
 public class UpdateWarehouseHandler

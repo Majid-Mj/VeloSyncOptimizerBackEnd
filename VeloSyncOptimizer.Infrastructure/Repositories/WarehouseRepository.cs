@@ -2,7 +2,7 @@ using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using VeloSyncOptimizer.Application.Common.Interfaces;
+using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse;
 using VeloSyncOptimizer.Application.Features.Warehouses.DTOs;
 using VeloSyncOptimizer.Domain.Entities;
@@ -104,4 +104,21 @@ public class WarehouseRepository : IWarehouseRepository
 
         return rows > 0;
     }
+
+
+
+    public async Task<bool> SoftDeleteAsync(Guid id, CancellationToken ct)
+    {
+        using var conn = new SqlConnection(_db.Database.GetConnectionString());
+
+        var rows = await conn.ExecuteAsync(
+            "inventory.sp_SoftDeleteWarehouse",
+            new { Id = id },
+            commandType: CommandType.StoredProcedure
+        );
+
+        return rows > 0;
+    }
+
+
 }

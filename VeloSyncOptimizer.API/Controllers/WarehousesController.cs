@@ -94,5 +94,23 @@ public class WarehousesController : ControllerBase
     }
 
 
+    [Authorize(Roles = "Administrator")]
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    {
+        var result = await _mediator.Send(
+            new DeleteWarehouseCommand(id), ct);
+
+        if (!result)
+            return NotFound(
+                ResponseFactory.Failure<object>("Warehouse not found or already deleted")
+            );
+
+        return Ok(
+            ResponseFactory.Success<object>(null, "Warehouse deleted successfully")
+        );
+    }
+
+
 }
 

@@ -1,5 +1,5 @@
 using MediatR;
-using VeloSyncOptimizer.Application.Common.Interfaces;
+using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse;
 
 namespace VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse;

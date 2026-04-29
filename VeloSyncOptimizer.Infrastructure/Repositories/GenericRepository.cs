@@ -37,4 +37,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     public Task<int> SaveChangesAsync(CancellationToken ct)
         => _db.SaveChangesAsync(ct);
 
+
+
 }
