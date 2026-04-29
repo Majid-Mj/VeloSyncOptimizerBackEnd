@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VeloSyncOptimizer.Application.Common.Helpers;
 using VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse;
 using VeloSyncOptimizer.Application.Features.Warehouses.Queries.GetAllWarehouses;
 
@@ -26,7 +27,7 @@ public class WarehousesController : ControllerBase
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new GetAllWarehousesQuery(), cancellationToken);
-        return Ok(result);
+        return Ok(ResponseFactory.Success(result, "Warehouses retrieved successfully"));
     }
 
     /// <summary>
@@ -40,6 +41,7 @@ public class WarehousesController : ControllerBase
         CancellationToken cancellationToken)
     {
         var id = await _mediator.Send(command, cancellationToken);
-        return CreatedAtAction(nameof(GetAll), new { }, new { id });
+        return Ok(ResponseFactory.Success(new { id }, "Warehouse created successfully"));
     }
 }
+
