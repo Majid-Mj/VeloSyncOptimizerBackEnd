@@ -1,7 +1,6 @@
 using FluentValidation;
-using VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse;
 
-namespace VeloSyncOptimizer.Application.Features.Warehouses.Commands;
+namespace VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse;
 
 public class CreateWarehouseValidator : AbstractValidator<CreateWarehouseCommand>
 {
