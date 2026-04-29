@@ -1,10 +1,19 @@
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD
 using Microsoft.OpenApi.Models;
 using VeloSyncOptimizer.API.Extensions;
+=======
+>>>>>>> origin/main
 using VeloSyncOptimizer.Application;
 using VeloSyncOptimizer.Infrastructure;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
 using VeloSyncOptimizer.Infrastructure.Persistence.Services;
+<<<<<<< HEAD
+=======
+using VeloSyncOptimizer.Infrastructure.Persistence.Seed;
+using VeloSyncOptimizer.Infrastructure;
+using VeloSyncOptimizer.API.Extensions;
+>>>>>>> origin/main
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,7 +67,11 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
+<<<<<<< HEAD
     await DatabaseSeeder.SeedDatabaseAsync(scope.ServiceProvider);
+=======
+    await scope.ServiceProvider.SeedDatabaseAsync();
+>>>>>>> origin/main
 }
 
 if (app.Environment.IsDevelopment())

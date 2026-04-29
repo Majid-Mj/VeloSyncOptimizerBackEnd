@@ -2,7 +2,13 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VeloSyncOptimizer.Application.Common.Helpers;
+<<<<<<< HEAD
 using VeloSyncOptimizer.Application.Features.Auth.Commands;
+=======
+using VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
+using VeloSyncOptimizer.Application.Features.Auth.Commands.Login;
+using VeloSyncOptimizer.Application.Features.Auth.Commands.Register;
+>>>>>>> origin/main
 
 namespace VeloSyncOptimizer.API.Controllers;
 

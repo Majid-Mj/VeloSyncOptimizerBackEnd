@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace VeloSyncOptimizer.Application.Features.Auth.Commands;
+namespace VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
 
 public record CreateUserCommand(
     string Email,

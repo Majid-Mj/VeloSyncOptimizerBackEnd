@@ -17,13 +17,22 @@ public class ExceptionMiddleware
         }
         catch (Exception ex)
         {
+<<<<<<< HEAD
             var errorMessage = ex.InnerException?.Message ?? ex.Message;
+=======
+            context.Response.StatusCode = 500;
+            context.Response.ContentType = "application/json";
+>>>>>>> origin/main
 
             var response = new ApiResponse<string>
             {
                 Success = false,
                 Message = "An error occurred",
+<<<<<<< HEAD
                 Errors = new List<string> { errorMessage }
+=======
+                Errors = new List<string> { ex.Message }
+>>>>>>> origin/main
             };
 
             await context.Response.WriteAsJsonAsync(response);

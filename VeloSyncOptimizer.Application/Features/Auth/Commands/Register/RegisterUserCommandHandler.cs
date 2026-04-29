@@ -1,19 +1,20 @@
 
 using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces;
-using VeloSyncOptimizer.Application.Features.Auth.Commands;
+using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
+
 using VeloSyncOptimizer.Infrastructure.Persistence.Models;
 
-namespace VeloSyncOptimizer.Application.Features.Auth.Handlers;
+namespace VeloSyncOptimizer.Application.Features.Auth.Commands.Register;
 
-public class RegisterUserHandler
+public class RegisterUserCommandHandler
     : IRequestHandler<RegisterUserCommand, Guid>
 {
     // ✅ Only interfaces — no AppDbContext, no EF Core, no Infrastructure
     private readonly IUserRepository _userRepo;
     private readonly IPasswordService _password;
 
-    public RegisterUserHandler(
+    public RegisterUserCommandHandler(
         IUserRepository userRepo,
         IPasswordService password)
     {

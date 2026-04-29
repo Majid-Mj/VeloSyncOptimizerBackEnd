@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\Context\" />
     <Folder Include="Persistence\Configurations\" />
   </ItemGroup>
 

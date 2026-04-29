@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using VeloSyncOptimizer.Domain.Entities;
 
 using VeloSyncOptimizer.Infrastructure.Persistence.Models;
 
@@ -13,7 +14,8 @@ public partial class AppDbContext : DbContext
     {
     }
 
- 
+    
+
     public virtual DbSet<AlertSeverity> AlertSeverities { get; set; }
 
     public virtual DbSet<AuditLog> AuditLogs { get; set; }
@@ -45,7 +47,7 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserRole> UserRoles { get; set; }
-    public virtual DbSet<VeloSyncOptimizer.Domain.Entities.RefreshToken> RefreshTokens { get; set; }
+    public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
 
     public virtual DbSet<VelocityCache> VelocityCaches { get; set; }
 
@@ -53,8 +55,24 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<WarehouseTransfer> WarehouseTransfers { get; set; }
 
+
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+
+        base.OnModelCreating(modelBuilder);
+        // If you use schema "identity"
+        modelBuilder.Entity<User>().ToTable("Users", "identity");
+        modelBuilder.Entity<UserRole>().ToTable("UserRoles", "identity");
+        modelBuilder.Entity<RefreshToken>().ToTable("RefreshTokens", "identity");
+
+        // Optional: soft-delete global filter
+        modelBuilder.Entity<User>().HasQueryFilter(x => !x.IsDeleted);
+
+
+
         modelBuilder.Entity<AuditLog>(entity =>
         {
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");

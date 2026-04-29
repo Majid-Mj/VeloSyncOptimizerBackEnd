@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -11,44 +11,34 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "RefreshTockens");
+            // Safely drop the old table with typo if it exists
+            migrationBuilder.Sql("IF OBJECT_ID('RefreshTockens', 'U') IS NOT NULL DROP TABLE RefreshTockens;");
 
-            migrationBuilder.CreateTable(
-                name: "RefreshTokens",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExpiresAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRevoked = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RefreshTokens", x => x.Id);
-                });
+            // Safely create the new table in the identity schema if it doesn't exist
+            migrationBuilder.Sql(@"
+                IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'RefreshTokens' AND schema_id = SCHEMA_ID('identity'))
+                BEGIN
+                    CREATE TABLE [identity].RefreshTokens (
+                        Id UNIQUEIDENTIFIER PRIMARY KEY,
+                        UserId UNIQUEIDENTIFIER NOT NULL,
+                        Token NVARCHAR(MAX) NOT NULL,
+                        UserName NVARCHAR(256) NOT NULL,
+                        RoleId INT NOT NULL,
+                        ExpiresAt DATETIME2 NOT NULL,
+                        IsRevoked BIT NOT NULL,
+                        CreatedAt DATETIME2 NOT NULL,
+                        CONSTRAINT FK_RefreshTokens_Users FOREIGN KEY (UserId) REFERENCES [identity].Users(Id)
+                    )
+                END
+            ");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RefreshTokens");
-
-            migrationBuilder.CreateTable(
-                name: "RefreshTockens",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RefreshTockens", x => x.Id);
-                });
+                name: "RefreshTokens",
+                schema: "identity");
         }
     }
 }
