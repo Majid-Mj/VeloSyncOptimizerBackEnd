@@ -21,6 +21,7 @@ public class AuthController : ControllerBase
     }
 
 
+    [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
     {
@@ -29,6 +30,7 @@ public class AuthController : ControllerBase
         return Ok(ResponseFactory.Success(new { UserId = id }, "User registered"));
     }
 
+    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
     {
@@ -37,8 +39,8 @@ public class AuthController : ControllerBase
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.Strict,
+            Secure = false,          // ⚠️ Set true in production
+            SameSite = SameSiteMode.Lax,
             Expires = DateTime.UtcNow.AddHours(2)
         };
 
@@ -47,8 +49,8 @@ public class AuthController : ControllerBase
         var refreshCookieOptions = new CookieOptions
         {
             HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.Strict,
+            Secure = false,          // ⚠️ Set true in production
+            SameSite = SameSiteMode.Lax,
             Expires = DateTime.UtcNow.AddDays(7)
         };
         Response.Cookies.Append("RefreshToken", result.RefreshToken, refreshCookieOptions);
@@ -88,6 +90,7 @@ public class AuthController : ControllerBase
     }
 
 
+    [AllowAnonymous]
     [HttpPost("refresh")]
     public async Task<IActionResult> RefreshToken(CancellationToken ct)
     {

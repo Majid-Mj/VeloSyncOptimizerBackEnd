@@ -30,6 +30,7 @@ namespace VeloSyncOptimizer.API.Extensions
 
                     options.Events = new JwtBearerEvents
                     {
+                        // ✅ Read token from cookie automatically
                         OnMessageReceived = context =>
                         {
                             var accessToken = context.Request.Cookies["AccessToken"];
@@ -42,7 +43,13 @@ namespace VeloSyncOptimizer.API.Extensions
                     };
                 });
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                // 🔐 Global policy: every endpoint requires auth unless [AllowAnonymous]
+                options.FallbackPolicy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
 
             return services;
         }

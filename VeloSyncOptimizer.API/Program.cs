@@ -63,10 +63,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); 
-app.UseAuthorization();
+app.UseMiddleware<ExceptionMiddleware>(); // ✅ Must be BEFORE auth to wrap the pipeline
 
-app.UseMiddleware<ExceptionMiddleware>();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

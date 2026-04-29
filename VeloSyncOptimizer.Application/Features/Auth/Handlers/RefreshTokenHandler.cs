@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Domain.Entities;
@@ -39,7 +39,7 @@ public class RefreshTokenHandler
         // 🔥 Rotate refresh token (recommended)
         storedToken.IsRevoked = true;
 
-        var newRefreshToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+        var newRefreshToken = _jwtService.GenerateRefreshToken();
 
         await _userRepo.SaveRefreshTokenAsync(new RefreshToken
         {
