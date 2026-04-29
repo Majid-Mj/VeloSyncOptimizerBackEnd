@@ -15,5 +15,8 @@ namespace VeloSyncOptimizer.Application.Common.Interfaces.Repositories
         Task SaveChangesAsync(CancellationToken cancellationToken);
 
         Task<List<UserDto>> GetPendingUsersAsync(CancellationToken ct);
+
+
+        Task RevokeRefreshTokenAsync(string refreshToken, CancellationToken ct);
     }
 }

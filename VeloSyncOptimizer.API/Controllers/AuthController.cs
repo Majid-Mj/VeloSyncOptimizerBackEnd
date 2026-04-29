@@ -1,10 +1,11 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VeloSyncOptimizer.Application.Common.Helpers;
-using VeloSyncOptimizer.Application.Features.Auth.Commands.Register;
-using VeloSyncOptimizer.Application.Features.Auth.Commands.Login;
 using VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
+using VeloSyncOptimizer.Application.Features.Auth.Commands.Login;
+using VeloSyncOptimizer.Application.Features.Auth.Commands.Register;
 
 
 
@@ -31,7 +32,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody]LoginUserCommand command)
+    public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
     {
         var result = await _mediator.Send(command);
 
@@ -57,11 +58,23 @@ public class AuthController : ControllerBase
         return Ok(ResponseFactory.Success(result, "Login successful"));
     }
 
-    [HttpPost("create-user")]
-    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Administrator")]
-    public async Task<IActionResult> CreateUser(CreateUserCommand command)
+    //[HttpPost("create-user")]
+    //[Microsoft.AspNetCore.Authorization.Authorize(Roles = "Administrator")]
+    //public async Task<IActionResult> CreateUser(CreateUserCommand command)
+    //{
+    //    var id = await _mediator.Send(command);
+    //    return Ok(ResponseFactory.Success(new { UserId = id }, "User created successfully"));
+    //}
+
+
+
+    //Logout Controller
+
+    [HttpPost("logout")]
+    [Authorize]
+    public async Task<IActionResult> Logout(LogoutRequestDto dto, CancellationToken ct)
     {
-        var id = await _mediator.Send(command);
-        return Ok(ResponseFactory.Success(new { UserId = id }, "User created successfully"));
+        await _mediator.Send(new LogoutCommand(dto.RefreshToken), ct);
+        return Ok("Logged out successfully");
     }
 }

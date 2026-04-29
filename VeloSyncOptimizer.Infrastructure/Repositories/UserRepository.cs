@@ -74,5 +74,17 @@ public class UserRepository : IUserRepository
 
         return result.ToList();
     }
+
+
+    public async Task RevokeRefreshTokenAsync(string refreshToken, CancellationToken ct)
+    {
+        using var conn = new SqlConnection(_db.Database.GetConnectionString());
+
+        await conn.ExecuteAsync(
+            "identity.sp_RevokeRefreshToken",
+            new { Token = refreshToken },
+            commandType: CommandType.StoredProcedure
+        );
+    }
 }
 
