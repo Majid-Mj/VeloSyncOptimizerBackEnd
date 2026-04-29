@@ -23,25 +23,28 @@ public class RegisterUserHandler
 
     public async Task<Guid> Handle(RegisterUserCommand req, CancellationToken ct)
     {
-        // 1. Check duplicate email — via interface
+        // 1. Check duplicate
         var exists = await _userRepo.ExistsByEmailAsync(req.Email, ct);
 
         if (exists)
             throw new InvalidOperationException($"Email '{req.Email}' is already registered");
 
-        // 2. Build Domain entity — pure C#, no DB concern
+
+        if (req.RoleId != 2 && req.RoleId != 3)
+            throw new Exception("Invalid role selected");
+
         var user = new User
         {
-            Id = Guid.NewGuid(),          // ✅ GUID pre-generated here    
+            Id = Guid.NewGuid(),
             Email = req.Email.ToLower().Trim(),
             PasswordHash = _password.Hash(req.Password),
             FirstName = req.FirstName,
             LastName = req.LastName,
-            RoleId = 2, // Default to WarehouseManager or appropriate role id
-            IsActive = true
+            RoleId = (byte)req.RoleId,        
+            IsActive = true,
+            IsApproved = false          // 🔥 KEY CHANGE
         };
 
-        // 3. Persist via interface — Dapper runs behind the scenes
         var newId = await _userRepo.CreateAsync(user, ct);
 
         return newId;

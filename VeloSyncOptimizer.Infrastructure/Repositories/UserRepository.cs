@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using VeloSyncOptimizer.Application.Features.Users.DTOs;
 using VeloSyncOptimizer.Domain.Entities;
+using VeloSyncOptimizer.Infrastructure.Dapper.Queries;
 
 namespace VeloSyncOptimizer.Infrastructure.Persistence.Repositories;
 
@@ -21,7 +23,7 @@ public class UserRepository : IUserRepository
 
 
     public async Task<User?> GetByEmailAsync(string email, CancellationToken ct)
-    {   
+    {
 
         using var conn = new SqlConnection(_db.Database.GetConnectionString());
         return await conn.QueryFirstOrDefaultAsync<User>(
@@ -57,8 +59,32 @@ public class UserRepository : IUserRepository
         token.CreatedAt = DateTime.UtcNow;
         token.IsRevoked = false;
 
-        await _db.RefreshTokens.AddAsync(token, ct); 
+        await _db.RefreshTokens.AddAsync(token, ct);
         await _db.SaveChangesAsync(ct);
     }
+
+    public async Task<User?> GetByIdAsync(Guid id)
+    {
+        return await _db.Users.FindAsync(id);
+    }
+
+    public async Task SaveChangesAsync(CancellationToken cancellationToken)
+    {
+        await _db.SaveChangesAsync(cancellationToken);
+    }
+
+
+    public async Task<List<UserDto>> GetPendingUsersAsync(CancellationToken ct)
+    {
+        using var conn = new SqlConnection(_db.Database.GetConnectionString());
+
+        var result = await conn.QueryAsync<UserDto>(
+            UserQueries.GetPendingUsers,
+            commandType: CommandType.StoredProcedure
+            );  
+
+        return result.ToList();
+    }
+
 
 }

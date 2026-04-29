@@ -34,6 +34,9 @@ public class LoginUserHandler
         if (user is null || !_password.Verify(req.Password, user.PasswordHash))
             throw new UnauthorizedAccessException("Invalid email or password");
 
+        if (!user.IsApproved)
+            throw new Exception("Account not approved by admin");
+
         // 3. Generate JWT via interface
         var roleName = user.RoleId switch
         {

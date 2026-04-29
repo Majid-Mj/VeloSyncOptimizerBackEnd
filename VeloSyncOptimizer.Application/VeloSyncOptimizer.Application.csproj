@@ -18,8 +18,4 @@
     <ProjectReference Include="..\VeloSyncOptimizer.Domain\VeloSyncOptimizer.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Auth\Handlers\" />
-  </ItemGroup>
-
 </Project>
