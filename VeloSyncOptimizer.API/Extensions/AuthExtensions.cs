@@ -27,6 +27,19 @@ namespace VeloSyncOptimizer.API.Extensions
 
                         IssuerSigningKey = new SymmetricSecurityKey(key)
                     };
+
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            var accessToken = context.Request.Cookies["AccessToken"];
+                            if (!string.IsNullOrEmpty(accessToken))
+                            {
+                                context.Token = accessToken;
+                            }
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
 
             services.AddAuthorization();

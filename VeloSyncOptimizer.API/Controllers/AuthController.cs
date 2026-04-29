@@ -72,9 +72,20 @@ public class AuthController : ControllerBase
 
     [HttpPost("logout")]
     [Authorize]
-    public async Task<IActionResult> Logout(LogoutRequestDto dto, CancellationToken ct)
+    public async Task<IActionResult> Logout(CancellationToken ct)
     {
-        await _mediator.Send(new LogoutCommand(dto.RefreshToken), ct);
-        return Ok("Logged out successfully");
+        // Automatically get RefreshToken from cookies
+        Request.Cookies.TryGetValue("RefreshToken", out var refreshToken);
+
+        if (!string.IsNullOrEmpty(refreshToken))
+        {
+            await _mediator.Send(new LogoutCommand(refreshToken), ct);
+        }
+
+        // Clear auth cookies
+        Response.Cookies.Delete("AccessToken");
+        Response.Cookies.Delete("RefreshToken");
+
+        return Ok(ResponseFactory.Success("Logged out successfully", "Success"));
     }
 }
