@@ -69,7 +69,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// ⚠️ ORDER MATTERS
 app.UseAuthentication();   // must come BEFORE Authorization
 app.UseAuthorization();
 

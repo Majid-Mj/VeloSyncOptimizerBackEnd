@@ -24,7 +24,7 @@ public class WarehousesController : ControllerBase
     /// Returns all non-deleted warehouses via [inventory].[sp_GetWarehouses].
     /// </summary>
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAll([FromBody]CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new GetAllWarehousesQuery(), cancellationToken);
         return Ok(ResponseFactory.Success(result, "Warehouses retrieved successfully"));

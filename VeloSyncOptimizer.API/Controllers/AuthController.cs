@@ -58,6 +58,6 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> CreateUser(CreateUserCommand command)
     {
         var id = await _mediator.Send(command);
-        return Ok(id);
+        return Ok(ResponseFactory.Success(new { UserId = id }, "User created successfully"));
     }
 }
