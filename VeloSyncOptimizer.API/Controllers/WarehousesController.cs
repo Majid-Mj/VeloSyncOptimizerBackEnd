@@ -64,7 +64,7 @@ public class WarehousesController : ControllerBase
 
 
     [Authorize(Roles = "Administrator")]
-    [HttpPut("{id}")]
+    [HttpPatch("{id}")]
     public async Task<IActionResult> Update(
     Guid id,
     UpdateWarehouseRequestDto dto,
@@ -94,9 +94,45 @@ public class WarehousesController : ControllerBase
     }
 
 
+    /// <summary>
+    /// PUT api/warehouses/{id}
+    /// Full replacement — all fields are required. Untouched fields will be overwritten.
+    /// </summary>
+    [Authorize(Roles = "Administrator")]
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Replace(
+        Guid id,
+        [FromBody] ReplaceWarehouseRequestDto dto,
+        CancellationToken ct)
+    {
+        // Build a full update command with all fields explicitly set
+        var command = new UpdateWarehouseCommand(
+            id,
+            dto.Code,
+            dto.Name,
+            dto.City,
+            dto.State,
+            dto.Country,
+            dto.TotalCapacity,
+            dto.IsActive
+        );
+
+        var result = await _mediator.Send(command, ct);
+
+        if (!result)
+            return NotFound(
+                ResponseFactory.Failure<object>("Warehouse not found or already deleted")
+            );
+
+        return Ok(
+            ResponseFactory.Success<object>(null, "Warehouse replaced successfully")
+        );
+    }
+
+
     [Authorize(Roles = "Administrator")]
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    public async Task<IActionResult> SoftDelete(Guid id, CancellationToken ct)
     {
         var result = await _mediator.Send(
             new DeleteWarehouseCommand(id), ct);

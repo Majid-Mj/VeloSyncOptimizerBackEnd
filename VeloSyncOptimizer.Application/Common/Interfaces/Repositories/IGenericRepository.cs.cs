@@ -15,7 +15,6 @@ public interface IGenericRepository<T> where T : class
 
     Task<int> SaveChangesAsync(CancellationToken ct);
 
-
 }
 
 
