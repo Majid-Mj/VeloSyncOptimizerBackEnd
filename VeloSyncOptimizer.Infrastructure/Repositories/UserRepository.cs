@@ -86,5 +86,26 @@ public class UserRepository : IUserRepository
             commandType: CommandType.StoredProcedure
         );
     }
+
+
+
+    public async Task<RefreshToken?> GetRefreshTokenAsync(string token, CancellationToken ct)
+    {
+        using var conn = new SqlConnection(_db.Database.GetConnectionString());
+
+        return await conn.QueryFirstOrDefaultAsync<RefreshToken>(
+            "identity.sp_GetRefreshToken",
+            new { Token = token },
+            commandType: CommandType.StoredProcedure
+        );
+    }
+
+    public async Task UpdateRefreshTokenAsync(RefreshToken token, CancellationToken ct)
+    {
+        _db.RefreshTokens.Update(token);
+        await _db.SaveChangesAsync(ct);
+    }
+
+
 }
 

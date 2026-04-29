@@ -28,4 +28,15 @@ public static class ResponseFactory
             Errors = errors ?? new List<string>()
         };
     }
+
+    public static ApiResponse<object> Error(string message, List<string>? errors = null)
+    {
+        return new ApiResponse<object>
+        {
+            Success = false,
+            Message = message,
+            Errors = errors ?? new List<string>(),
+            Data = null
+        };
+    }
 }

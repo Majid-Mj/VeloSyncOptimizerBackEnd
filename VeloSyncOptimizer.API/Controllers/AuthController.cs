@@ -1,9 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VeloSyncOptimizer.Application.Common.Helpers;
-using VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
 using VeloSyncOptimizer.Application.Features.Auth.Commands.Login;
 using VeloSyncOptimizer.Application.Features.Auth.Commands.Register;
 
@@ -80,12 +78,46 @@ public class AuthController : ControllerBase
         if (!string.IsNullOrEmpty(refreshToken))
         {
             await _mediator.Send(new LogoutCommand(refreshToken), ct);
-        }
+        }                           
 
         // Clear auth cookies
         Response.Cookies.Delete("AccessToken");
         Response.Cookies.Delete("RefreshToken");
 
         return Ok(ResponseFactory.Success("Logged out successfully", "Success"));
+    }
+
+
+    [HttpPost("refresh")]
+    public async Task<IActionResult> RefreshToken(CancellationToken ct)
+    {
+        // Automatically get RefreshToken from cookies
+        if (!Request.Cookies.TryGetValue("RefreshToken", out var refreshToken))
+        {
+            return Unauthorized(ResponseFactory.Error("No refresh token found in cookies"));
+        }
+
+        var result = await _mediator.Send(new RefreshTokenCommand(refreshToken), ct);
+
+        // Update Cookies with new tokens
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTime.UtcNow.AddHours(2)
+        };
+        Response.Cookies.Append("AccessToken", result.Token, cookieOptions);
+
+        var refreshCookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTime.UtcNow.AddDays(7)
+        };
+        Response.Cookies.Append("RefreshToken", result.RefreshToken, refreshCookieOptions);
+
+        return Ok(ResponseFactory.Success(result, "Token refreshed successfully"));
     }
 }

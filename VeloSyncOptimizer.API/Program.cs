@@ -2,8 +2,6 @@ using Microsoft.OpenApi.Models;
 using VeloSyncOptimizer.API.Extensions;
 using VeloSyncOptimizer.Application;
 using VeloSyncOptimizer.Infrastructure;
-using VeloSyncOptimizer.Infrastructure.Persistence.Context;
-using VeloSyncOptimizer.Infrastructure.Persistence.Services;
 using VeloSyncOptimizer.Infrastructure.Persistence.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,26 +16,21 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "VeloSync API",
-        Version = "v1"
-    });
 
-    // 🔐 Add JWT Auth to Swagger
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Name = "Authorization",
         Type = SecuritySchemeType.Http,
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Enter JWT like: Bearer {your token}"
+        Name = "Authorization",
+        Description = "Enter: Bearer {token}"
     });
 
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
             new OpenApiSecurityScheme
@@ -48,7 +41,7 @@ builder.Services.AddSwaggerGen(options =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            Array.Empty<string>()
         }
     });
 });
@@ -67,9 +60,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
-app.UseAuthentication();   // must come BEFORE Authorization
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.UseMiddleware<ExceptionMiddleware>();

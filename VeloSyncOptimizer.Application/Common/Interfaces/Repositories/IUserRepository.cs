@@ -18,5 +18,9 @@ namespace VeloSyncOptimizer.Application.Common.Interfaces.Repositories
 
 
         Task RevokeRefreshTokenAsync(string refreshToken, CancellationToken ct);
+
+
+        Task<RefreshToken?> GetRefreshTokenAsync(string token, CancellationToken ct);
+        Task UpdateRefreshTokenAsync(RefreshToken token, CancellationToken ct);
     }
 }
