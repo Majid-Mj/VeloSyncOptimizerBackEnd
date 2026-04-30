@@ -39,6 +39,7 @@ public class CategoriesController : ControllerBase
 
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> UpdateCategory(
      Guid id,
      [FromBody] UpdateCategoryRequest request,
@@ -56,6 +57,23 @@ public class CategoriesController : ControllerBase
         return Ok(ResponseFactory.Success(result, "Updated successfully"));
     }
 
+
+
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<IActionResult> DeleteCategory(
+    Guid id,
+    CancellationToken cancellationToken)
+    {
+        var command = new DeleteCategoryCommand
+        {
+            Id = id
+        };
+
+        var result = await _mediator.Send(command, cancellationToken);
+
+        return Ok(ResponseFactory.Success(result, "Category deleted successfully"));
+    }
 
 
 }

@@ -23,6 +23,7 @@ public partial class Category
     public DateTime UpdatedAt { get; set; }
 
     public bool IsDeleted { get; set; }
+    public DateTime? DeletedAt { get; set; }
 
     [InverseProperty("Parent")]
     public virtual ICollection<Category> InverseParent { get; set; } = new List<Category>();
