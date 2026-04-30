@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
@@ -21,7 +22,7 @@ public static class DependencyInjection
         // 🔹 Query (Read)
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IWarehouseRepository, WarehouseRepository>();
-        
+
         // Services
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IPasswordService, PasswordService>();
@@ -29,7 +30,19 @@ public static class DependencyInjection
         //GenericRepository injection
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-        services.AddScoped<ICategoryQueryRepository, CategoryQueryRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+
+
+        var redisConnection = config["Redis:Connection"];
+
+        if (!string.IsNullOrWhiteSpace(redisConnection))
+        {
+            services.AddSingleton<IConnectionMultiplexer>(sp =>
+                ConnectionMultiplexer.Connect(redisConnection));
+
+            services.AddScoped<ICacheService, CacheService>();
+        }
 
         return services;
     }
