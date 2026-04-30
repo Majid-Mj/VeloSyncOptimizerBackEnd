@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
-namespace VeloSyncOptimizer.Application.Features.Supplier.Commands.DeleteSupplierCommand
+public class DeleteSupplierCommand : IRequest<bool>
 {
-    internal class DeleteSupplierCommand
-    {
-    }
+    public Guid Id { get; set; }
 }

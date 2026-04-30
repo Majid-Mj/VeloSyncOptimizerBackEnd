@@ -68,4 +68,21 @@ public class SuppliersController : ControllerBase
 
         return Ok(ResponseFactory.Success(result, "Supplier updated successfully"));
     }
+
+
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<IActionResult> DeleteSupplier(
+    Guid id,
+    CancellationToken cancellationToken)
+    {
+        var command = new DeleteSupplierCommand
+        {
+            Id = id
+        };
+
+        var result = await _mediator.Send(command, cancellationToken);
+
+        return Ok(ResponseFactory.Success(result, "Supplier deactivated successfully"));
+    }
 }

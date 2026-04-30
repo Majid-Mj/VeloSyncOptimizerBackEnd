@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
-namespace VeloSyncOptimizer.Application.Features.Supplier.Commands.DeleteSupplierCommand
+public class DeleteSupplierValidator : AbstractValidator<DeleteSupplierCommand>
 {
-    internal class DeleteSupplierValidator
+    public DeleteSupplierValidator()
     {
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("Supplier Id is required");
     }
 }
