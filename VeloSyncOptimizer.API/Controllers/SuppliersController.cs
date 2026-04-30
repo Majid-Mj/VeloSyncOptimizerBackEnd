@@ -22,4 +22,17 @@ public class SuppliersController : ControllerBase
 
         return Ok(ResponseFactory.Success(result, "Suppliers fetched successfully"));
     }
+
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetSupplierById(
+    Guid id,
+    CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(
+            new GetSupplierByIdQuery { Id = id },
+            cancellationToken);
+
+        return Ok(ResponseFactory.Success(result, "Supplier fetched successfully"));
+    }
 }
