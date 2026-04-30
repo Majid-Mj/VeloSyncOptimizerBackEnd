@@ -47,4 +47,25 @@ public class SuppliersController : ControllerBase
 
         return Ok(ResponseFactory.Success(result, "Supplier created successfully"));
     }
+
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<IActionResult> UpdateSupplier(
+    Guid id,
+    [FromBody] UpdateSupplierRequest request,
+    CancellationToken cancellationToken)
+    {
+        var command = new UpdateSupplierCommand
+        {
+            Id = id,
+            Name = request.Name,
+            ContactEmail = request.ContactEmail,
+            ContactPhone = request.ContactPhone,
+            IsActive = request.IsActive
+        };
+
+        var result = await _mediator.Send(command, cancellationToken);
+
+        return Ok(ResponseFactory.Success(result, "Supplier updated successfully"));
+    }
 }
