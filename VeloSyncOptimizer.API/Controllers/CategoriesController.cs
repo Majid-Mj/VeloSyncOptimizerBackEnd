@@ -38,6 +38,24 @@ public class CategoriesController : ControllerBase
 
 
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateCategory(
+     Guid id,
+     [FromBody] UpdateCategoryRequest request,
+     CancellationToken cancellationToken)
+    {
+        var command = new UpdateCategoryCommand
+        {
+            Id = id,
+            Name = request.Name,
+            ParentId = request.ParentId
+        };
 
-        
+        var result = await _mediator.Send(command, cancellationToken);
+
+        return Ok(ResponseFactory.Success(result, "Updated successfully"));
+    }
+
+
+
 }
