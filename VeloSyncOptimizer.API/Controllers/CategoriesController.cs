@@ -24,4 +24,20 @@ public class CategoriesController : ControllerBase
 
         return Ok(ResponseFactory.Success(result, "Categories fetched successfully"));
     }
+
+    [HttpPost]
+    [Authorize(Roles = "Administrator")]
+    public async Task<IActionResult> CreateCategory(
+    [FromBody] CreateCategoryCommand command,
+    CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(command, cancellationToken);
+
+        return Ok(ResponseFactory.Success(result, "Category created successfully"));
+    }
+
+
+
+
+        
 }
