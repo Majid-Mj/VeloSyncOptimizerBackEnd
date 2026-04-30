@@ -35,4 +35,16 @@ public class SuppliersController : ControllerBase
 
         return Ok(ResponseFactory.Success(result, "Supplier fetched successfully"));
     }
+
+
+    [HttpPost]
+    [Authorize(Roles = "Administrator")]
+    public async Task<IActionResult> CreateSupplier(
+    [FromBody] CreateSupplierCommand command,
+    CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(command, cancellationToken);
+
+        return Ok(ResponseFactory.Success(result, "Supplier created successfully"));
+    }
 }
