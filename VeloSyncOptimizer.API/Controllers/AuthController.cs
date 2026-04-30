@@ -23,7 +23,8 @@ public class AuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Register([FromForm] RegisterUserCommand command)
     {
         var id = await _mediator.Send(command);
 
@@ -32,7 +33,8 @@ public class AuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Login([FromForm] LoginUserCommand command)
     {
         var result = await _mediator.Send(command);
 

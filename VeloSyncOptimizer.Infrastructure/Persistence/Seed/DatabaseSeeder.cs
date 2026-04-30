@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
 using VeloSyncOptimizer.Domain.Entities;
+using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 
 namespace VeloSyncOptimizer.Infrastructure.Persistence.Seed;
 

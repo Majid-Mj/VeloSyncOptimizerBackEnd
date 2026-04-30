@@ -67,7 +67,7 @@ public class WarehousesController : ControllerBase
     [HttpPatch("{id}")]
     public async Task<IActionResult> Update(
     Guid id,
-    UpdateWarehouseRequestDto dto,
+    [FromForm] UpdateWarehouseRequestDto dto,
     CancellationToken ct)
     {
         var command = new UpdateWarehouseCommand(
@@ -102,7 +102,7 @@ public class WarehousesController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Replace(
         Guid id,
-        [FromBody] ReplaceWarehouseRequestDto dto,
+        [FromForm] ReplaceWarehouseRequestDto dto,
         CancellationToken ct)
     {
         // Build a full update command with all fields explicitly set

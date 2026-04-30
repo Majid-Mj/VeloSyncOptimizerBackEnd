@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace VeloSyncOptimizer.Infrastructure.Persistence.Services;
 
 using System.Security.Cryptography;
-using VeloSyncOptimizer.Application.Common.Interfaces;
+using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 
 public class TokenService : ITokenService
 {

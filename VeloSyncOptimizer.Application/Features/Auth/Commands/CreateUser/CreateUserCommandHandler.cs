@@ -1,7 +1,6 @@
 using MediatR;
-using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
-
+using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 using VeloSyncOptimizer.Domain.Entities;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
+using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
 using VeloSyncOptimizer.Infrastructure.Persistence.Repositories;
 using VeloSyncOptimizer.Infrastructure.Persistence.Services;
@@ -28,6 +28,8 @@ public static class DependencyInjection
 
         //GenericRepository injection
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+        services.AddScoped<ICategoryQueryRepository, CategoryQueryRepository>();
 
         return services;
     }
