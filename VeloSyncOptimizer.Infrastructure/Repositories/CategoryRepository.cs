@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
 
-public class CategoryQueryRepository : ICategoryQueryRepository
+public class CategoryRepository : ICategoryRepository
 {
     private readonly AppDbContext _context;
 
-    public CategoryQueryRepository(AppDbContext context)
+    public CategoryRepository(AppDbContext context)
     {
         _context = context;
     }

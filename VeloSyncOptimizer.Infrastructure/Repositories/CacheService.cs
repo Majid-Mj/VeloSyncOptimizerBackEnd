@@ -1,12 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StackExchange.Redis;
+using System.Text.Json;
+using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 
-namespace VeloSyncOptimizer.Infrastructure.Repositories
+public class CacheService : ICacheService
 {
-    internal class CacheService
+    private readonly IDatabase _db;
+
+    public CacheService(IConnectionMultiplexer redis)
     {
+        _db = redis.GetDatabase();
+    }
+
+    public async Task<T?> GetAsync<T>(string key)
+    {
+        var value = await _db.StringGetAsync(key);
+
+        if (value.IsNullOrEmpty)
+            return default;
+
+        return JsonSerializer.Deserialize<T>(value!);
+    }
+
+    public async Task SetAsync<T>(string key, T value, TimeSpan expiry)
+    {
+        var json = JsonSerializer.Serialize(value);
+        await _db.StringSetAsync(key, json, expiry);
+    }
+
+    public async Task RemoveAsync(string key)
+    {
+        await _db.KeyDeleteAsync(key);
     }
 }

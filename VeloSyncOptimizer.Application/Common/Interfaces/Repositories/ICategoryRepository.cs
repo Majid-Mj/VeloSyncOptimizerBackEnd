@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-public interface ICategoryQueryRepository
+public interface ICategoryRepository
 {
     Task<IEnumerable<T>> QueryAsync<T>(
         string sql,
