@@ -1,8 +1,7 @@
 using MediatR;
-using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
-
-using VeloSyncOptimizer.Infrastructure.Persistence.Models;
+using VeloSyncOptimizer.Application.Common.Interfaces.Services;
+using VeloSyncOptimizer.Domain.Entities;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
 
@@ -34,7 +33,8 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
             FirstName = req.FirstName,
             LastName = req.LastName,
             RoleId = req.RoleId, 
-            IsActive = true
+            IsActive = true,
+            IsApproved = true
         };
 
         var newId = await _userRepo.CreateAsync(user, ct);

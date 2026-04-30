@@ -5,15 +5,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using VeloSyncOptimizer.Domain.Entities.Common;
 
-namespace VeloSyncOptimizer.Infrastructure.Persistence.Models;
+namespace VeloSyncOptimizer.Domain.Entities;
 
 [Table("Users", Schema = "identity")]
 [Index("Email", Name = "UQ_Users_Email", IsUnique = true)]
-public partial class User : BaseEntity
+public partial class User : SoftDeletableEntity
 {
-    [Key]
-    public Guid Id { get; set; }
-
     [StringLength(256)]
     public string Email { get; set; } = null!;
 
@@ -29,19 +26,13 @@ public partial class User : BaseEntity
     public byte RoleId { get; set; }
 
     public bool IsActive { get; set; }
+
+    public bool IsApproved { get; set; }
     
     [NotMapped]
     public string RoleName { get; set; } = string.Empty;
 
     public DateTime? LastLoginAt { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public bool IsDeleted { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     [InverseProperty("User")]
     public virtual ICollection<AuditLog> AuditLogs { get; set; } = new List<AuditLog>();

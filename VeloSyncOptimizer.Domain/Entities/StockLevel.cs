@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace VeloSyncOptimizer.Infrastructure.Persistence.Models;
+namespace VeloSyncOptimizer.Domain.Entities;
 
 [Table("StockLevels", Schema = "inventory")]
 [Index("ProductId", Name = "IX_StockLevels_ProductId")]

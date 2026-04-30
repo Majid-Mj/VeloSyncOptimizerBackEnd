@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +26,17 @@ public static class ResponseFactory
             Success = false,
             Message = message,
             Errors = errors ?? new List<string>()
+        };
+    }
+
+    public static ApiResponse<object> Error(string message, List<string>? errors = null)
+    {
+        return new ApiResponse<object>
+        {
+            Success = false,
+            Message = message,
+            Errors = errors ?? new List<string>(),
+            Data = null
         };
     }
 }

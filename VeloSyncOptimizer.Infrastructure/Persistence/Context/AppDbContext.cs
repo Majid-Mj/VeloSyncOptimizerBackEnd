@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using VeloSyncOptimizer.Domain.Entities;
 
-using VeloSyncOptimizer.Infrastructure.Persistence.Models;
+using VeloSyncOptimizer.Domain.Entities;
 
 namespace VeloSyncOptimizer.Infrastructure.Persistence.Context;
 

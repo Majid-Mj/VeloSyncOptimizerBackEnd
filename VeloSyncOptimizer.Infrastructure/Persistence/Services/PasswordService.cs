@@ -1,4 +1,4 @@
-﻿using VeloSyncOptimizer.Application.Common.Interfaces;
+using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 
 namespace VeloSyncOptimizer.Infrastructure.Persistence.Services
 {

@@ -1,8 +1,7 @@
 
 using MediatR;
-using VeloSyncOptimizer.Application.Common.Interfaces;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
-
+using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 using VeloSyncOptimizer.Application.Features.Auth.DTOs;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands.Login;
@@ -35,10 +34,13 @@ public class LoginUserCommandHandler
         if (user is null || !_password.Verify(req.Password, user.PasswordHash))
             throw new UnauthorizedAccessException("Invalid email or password");
 
+        if (!user.IsApproved)
+            throw new Exception("Account not approved by admin");
+
         // 3. Generate JWT via interface
         var accessToken = _jwt.GenerateToken(
             user.Id,
-            user.RoleId
+            user.RoleName
         );
 
         var refreshToken = _jwt.GenerateRefreshToken();
