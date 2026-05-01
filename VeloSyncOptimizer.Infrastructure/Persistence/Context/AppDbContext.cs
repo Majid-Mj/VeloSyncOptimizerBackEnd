@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using VeloSyncOptimizer.Domain.Entities;
 
-using VeloSyncOptimizer.Domain.Entities;
-
 namespace VeloSyncOptimizer.Infrastructure.Persistence.Context;
 
 public partial class AppDbContext : DbContext

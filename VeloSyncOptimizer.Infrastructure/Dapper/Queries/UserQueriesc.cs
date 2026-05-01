@@ -9,4 +9,6 @@ namespace VeloSyncOptimizer.Infrastructure.Dapper.Queries;
 public static class UserQueries
 {
     public const string GetPendingUsers = "identity.sp_GetPendingUsers";
+
+    
 }

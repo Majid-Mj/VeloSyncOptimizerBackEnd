@@ -29,8 +29,9 @@ public static class DependencyInjection
 
         //GenericRepository injection
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+            
+        services.AddScoped<IDapperRepository, DapperRepository>();
 
 
 
