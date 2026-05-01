@@ -9,12 +9,12 @@ public interface IWarehouseRepository
     Task<IEnumerable<WarehouseDto>> GetAllAsync(CancellationToken ct);
 
     // ── Commands (EF Core) ────────────────────────────────────────────────
-    Task<Guid> CreateAsync(CreateWarehouseCommand command, CancellationToken ct);
+    Task<int> CreateAsync(CreateWarehouseCommand command, CancellationToken ct);
 
 
-    Task<WarehouseDto?> GetByIdAsync(Guid id, CancellationToken ct);
+    Task<WarehouseDto?> GetByIdAsync(int id, CancellationToken ct);
 
     Task<bool> UpdateAsync(WarehouseDto warehouse, CancellationToken ct);
 
-    Task<bool> SoftDeleteAsync(Guid id, CancellationToken ct);
+    Task<bool> SoftDeleteAsync(int id, CancellationToken ct);
 }

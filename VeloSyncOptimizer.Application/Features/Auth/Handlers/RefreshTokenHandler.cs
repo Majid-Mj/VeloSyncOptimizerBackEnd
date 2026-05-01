@@ -43,7 +43,6 @@ public class RefreshTokenHandler
 
         await _userRepo.SaveRefreshTokenAsync(new RefreshToken
         {
-            Id = Guid.NewGuid(),
             UserId = user.Id,
             Token = newRefreshToken,
             ExpiresAt = DateTime.UtcNow.AddDays(7)

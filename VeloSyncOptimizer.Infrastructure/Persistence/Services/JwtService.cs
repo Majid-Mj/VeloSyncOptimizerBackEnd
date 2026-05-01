@@ -21,7 +21,7 @@ namespace VeloSyncOptimizer.Infrastructure.Persistence.Services
         }
 
 
-        public string GenerateToken(Guid userId, string roleName)
+        public string GenerateToken(int userId, string roleName)
         {
             var claims = new[]
             {

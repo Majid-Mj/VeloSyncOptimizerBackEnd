@@ -5,7 +5,7 @@ using VeloSyncOptimizer.Domain.Entities;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
 
-public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
+public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
 {
     private readonly IUserRepository _userRepo;
     private readonly IPasswordService _password;
@@ -18,7 +18,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
         _password = password;
     }
 
-    public async Task<Guid> Handle(CreateUserCommand req, CancellationToken ct)
+    public async Task<int> Handle(CreateUserCommand req, CancellationToken ct)
     {
         var exists = await _userRepo.ExistsByEmailAsync(req.Email, ct);
 
@@ -27,7 +27,6 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
 
         var user = new User
         {
-            Id = Guid.NewGuid(),
             Email = req.Email.ToLower().Trim(),
             PasswordHash = _password.Hash(req.Password),
             FirstName = req.FirstName,

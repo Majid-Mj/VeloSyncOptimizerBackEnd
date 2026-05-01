@@ -10,7 +10,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         _db = db;
     }
 
-    public async Task<T?> GetByIdAsync(Guid id, CancellationToken ct)
+    public async Task<T?> GetByIdAsync(int id, CancellationToken ct)
     {
         return await _db.Set<T>().FindAsync(new object[] { id }, ct);
     }

@@ -11,12 +11,12 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class Category
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [StringLength(100)]
     public string Name { get; set; } = null!;
 
-    public Guid? ParentId { get; set; }
+    public int? ParentId { get; set; }
 
     public DateTime CreatedAt { get; set; }
 

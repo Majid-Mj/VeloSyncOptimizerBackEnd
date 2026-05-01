@@ -1,8 +1,8 @@
-﻿public class CategoryResponseDto
+public class CategoryResponseDto
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; } = default!;
-    public Guid? ParentId { get; set; }
+    public int? ParentId { get; set; }
 
     public List<CategoryResponseDto> Children { get; set; } = new();
 }

@@ -14,7 +14,7 @@ public partial class AuditLog
     [Key]
     public long Id { get; set; }
 
-    public Guid? UserId { get; set; }
+    public int? UserId { get; set; }
 
     [StringLength(100)]
     public string Action { get; set; } = null!;

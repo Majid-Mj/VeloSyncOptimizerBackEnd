@@ -1,10 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 using VeloSyncOptimizer.Domain.Entities;
 
 public class CreateCategoryHandler
-    : IRequestHandler<CreateCategoryCommand, Guid>
+    : IRequestHandler<CreateCategoryCommand, int>
 {
     private readonly IGenericRepository<Category> _repo;
     private readonly ICategoryRepository _queryRepo;
@@ -20,7 +20,7 @@ public class CreateCategoryHandler
         _cache = cache;
     }
 
-    public async Task<Guid> Handle(
+    public async Task<int> Handle(
         CreateCategoryCommand request,
         CancellationToken ct)
     {
@@ -40,7 +40,6 @@ public class CreateCategoryHandler
         //  Create entity
         var category = new Category
         {
-            Id = Guid.NewGuid(),
             Name = request.Name.Trim(),
             ParentId = request.ParentId,
             CreatedAt = DateTime.UtcNow,

@@ -5,7 +5,7 @@ using VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse
 namespace VeloSyncOptimizer.Application.Features.Warehouses.Commands.CreateWarehouse;
 
 public class CreateWarehouseCommandHandler
-    : IRequestHandler<CreateWarehouseCommand, Guid>
+    : IRequestHandler<CreateWarehouseCommand, int>
 {
     // ✅ Only the interface — no EF Core, no DbContext here
     private readonly IWarehouseRepository _warehouseRepo;
@@ -15,7 +15,7 @@ public class CreateWarehouseCommandHandler
         _warehouseRepo = warehouseRepo;
     }
 
-    public async Task<Guid> Handle(
+    public async Task<int> Handle(
         CreateWarehouseCommand request,
         CancellationToken cancellationToken)
     {

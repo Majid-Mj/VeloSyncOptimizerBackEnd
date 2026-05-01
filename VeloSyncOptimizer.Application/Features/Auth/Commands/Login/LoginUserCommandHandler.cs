@@ -48,7 +48,6 @@ public class LoginUserCommandHandler
         // 4. Save Refresh Token to DB
         await _userRepo.SaveRefreshTokenAsync(new VeloSyncOptimizer.Domain.Entities.RefreshToken
         {
-            Id = Guid.NewGuid(),
             UserId = user.Id,
             Token = refreshToken,
             UserName = user.FirstName + " " + user.LastName,

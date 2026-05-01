@@ -9,4 +9,4 @@ public record RegisterUserCommand(
     string FirstName,
     string LastName,
     int RoleId  
-) : IRequest<Guid>;
+) : IRequest<int>;

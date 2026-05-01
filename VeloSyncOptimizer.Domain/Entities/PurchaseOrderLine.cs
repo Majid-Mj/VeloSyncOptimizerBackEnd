@@ -12,11 +12,11 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class PurchaseOrderLine
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
-    public Guid PurchaseOrderId { get; set; }
+    public int PurchaseOrderId { get; set; }
 
-    public Guid ProductId { get; set; }
+    public int ProductId { get; set; }
 
     public int QuantityOrdered { get; set; }
 

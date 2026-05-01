@@ -1,10 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 using VeloSyncOptimizer.Domain.Entities;
 
 public class CreateSupplierHandler
-    : IRequestHandler<CreateSupplierCommand, Guid>
+    : IRequestHandler<CreateSupplierCommand, int>
 {
     private readonly IGenericRepository<Supplier> _repo;
     private readonly ICategoryRepository _queryRepo; // Dapper (for duplicate check)
@@ -20,7 +20,7 @@ public class CreateSupplierHandler
         _cache = cache;
     }
 
-    public async Task<Guid> Handle(CreateSupplierCommand request, CancellationToken ct)
+    public async Task<int> Handle(CreateSupplierCommand request, CancellationToken ct)
     {
         // Duplicate check (by Name)
         var existing = (await _queryRepo.QueryAsync<Supplier>(
@@ -34,7 +34,6 @@ public class CreateSupplierHandler
         // Create entity
         var supplier = new Supplier
         {
-            Id = Guid.NewGuid(),
             Name = request.Name.Trim(),
             ContactEmail = request.ContactEmail,
             ContactPhone = request.ContactPhone,

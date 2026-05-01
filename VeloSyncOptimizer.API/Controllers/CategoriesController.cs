@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VeloSyncOptimizer.Application.Common.Helpers;
@@ -41,7 +41,7 @@ public class CategoriesController : ControllerBase
     [HttpPut("{id}")]
     [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> UpdateCategory(
-     Guid id,
+     int id,
      [FromBody] UpdateCategoryRequest request,
      CancellationToken cancellationToken)
     {
@@ -62,7 +62,7 @@ public class CategoriesController : ControllerBase
     [HttpDelete("{id}")]
     [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> DeleteCategory(
-    Guid id,
+    int id,
     CancellationToken cancellationToken)
     {
         var command = new DeleteCategoryCommand

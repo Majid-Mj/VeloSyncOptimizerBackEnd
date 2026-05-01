@@ -80,7 +80,6 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("(sysutcdatetime())");
 
@@ -95,7 +94,6 @@ public partial class AppDbContext : DbContext
 
             entity.HasIndex(e => e.SupplierId, "IX_Products_SupplierId").HasFilter("([IsDeleted]=(0))");
 
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.LeadTimeDays).HasDefaultValue(7);
@@ -110,7 +108,6 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<PurchaseOrder>(entity =>
         {
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
             entity.Property(e => e.StatusId).HasDefaultValue((byte)1);
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("(sysutcdatetime())");
@@ -136,7 +133,6 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_POLines");
 
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.LineTotal).HasComputedColumnSql("([QuantityOrdered]*[UnitCost])", true);
 
             entity.HasOne(d => d.Product).WithMany(p => p.PurchaseOrderLines)
@@ -153,7 +149,6 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<ReorderSuggestion>(entity =>
         {
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.GeneratedAt).HasDefaultValueSql("(sysutcdatetime())");
 
             entity.HasOne(d => d.Product).WithMany(p => p.ReorderSuggestions)
@@ -173,7 +168,6 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<StockAlert>(entity =>
         {
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
 
             entity.HasOne(d => d.Product).WithMany(p => p.StockAlerts)
@@ -193,7 +187,6 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<StockLevel>(entity =>
         {
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
             entity.Property(e => e.RowVersion)
                 .IsRowVersion()
@@ -211,7 +204,6 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<StockMovement>(entity =>
         {
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
 
             entity.HasOne(d => d.CreatedByUser).WithMany(p => p.StockMovements).HasConstraintName("FK_StockMov_User");
@@ -231,14 +223,12 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<Supplier>(entity =>
         {
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
         });
 
         modelBuilder.Entity<SupplierDelivery>(entity =>
         {
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
             entity.Property(e => e.DaysLate).HasComputedColumnSql("(case when [ActualDate] IS NOT NULL AND [ActualDate]>[PromisedDate] then datediff(day,[PromisedDate],[ActualDate]) else (0) end)", true);
             entity.Property(e => e.IsOnTime).HasComputedColumnSql("(case when [ActualDate] IS NOT NULL AND [ActualDate]<=[PromisedDate] then CONVERT([bit],(1)) else CONVERT([bit],(0)) end)", true);
@@ -259,7 +249,6 @@ public partial class AppDbContext : DbContext
 
             entity.HasIndex(e => e.RoleId, "IX_Users_RoleId").HasFilter("([IsDeleted]=(0))");
 
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("(sysutcdatetime())");
@@ -271,7 +260,6 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<VelocityCache>(entity =>
         {
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.ComputedAt).HasDefaultValueSql("(sysutcdatetime())");
 
             entity.HasOne(d => d.Product).WithMany(p => p.VelocityCaches)
@@ -287,7 +275,6 @@ public partial class AppDbContext : DbContext
         {
             entity.HasIndex(e => e.Code, "IX_Warehouses_Code").HasFilter("([IsDeleted]=(0))");
 
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("(sysutcdatetime())");

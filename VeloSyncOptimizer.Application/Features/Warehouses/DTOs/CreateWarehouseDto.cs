@@ -11,5 +11,5 @@ public record CreateWarehouseDto(
     decimal? Latitude,
     decimal? Longitude,
     int      TotalCapacity,
-    Guid?    ManagerId
+    int?    ManagerId
 );

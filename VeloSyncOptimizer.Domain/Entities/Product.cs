@@ -11,7 +11,7 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class Product
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [StringLength(100)]
     public string SKU { get; set; } = null!;
@@ -22,9 +22,9 @@ public partial class Product
     [StringLength(1000)]
     public string? Description { get; set; }
 
-    public Guid? CategoryId { get; set; }
+    public int? CategoryId { get; set; }
 
-    public Guid? SupplierId { get; set; }
+    public int? SupplierId { get; set; }
 
     [StringLength(30)]
     public string UnitOfMeasure { get; set; } = null!;

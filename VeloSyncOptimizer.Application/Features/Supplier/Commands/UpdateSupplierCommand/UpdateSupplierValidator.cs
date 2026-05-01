@@ -1,11 +1,11 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 public class UpdateSupplierValidator : AbstractValidator<UpdateSupplierCommand>
 {
     public UpdateSupplierValidator()
     {
         RuleFor(x => x.Id)
-            .NotEmpty();
+            .GreaterThan(0);
 
         RuleFor(x => x.Name)
             .MaximumLength(200)

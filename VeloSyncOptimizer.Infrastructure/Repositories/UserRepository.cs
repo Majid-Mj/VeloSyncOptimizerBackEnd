@@ -40,7 +40,7 @@ public class UserRepository : IUserRepository
         );
     }
 
-    public async Task<Guid> CreateAsync(User user, CancellationToken ct)
+    public async Task<int> CreateAsync(User user, CancellationToken ct)
     {
         _db.Users.Add(user);
         await _db.SaveChangesAsync(ct);
@@ -53,7 +53,7 @@ public class UserRepository : IUserRepository
         await _db.SaveChangesAsync(ct);
     }
 
-    public async Task<User?> GetByIdAsync(Guid id)
+    public async Task<User?> GetByIdAsync(int id)
     {
         return await _db.Users.FindAsync(id);
     }

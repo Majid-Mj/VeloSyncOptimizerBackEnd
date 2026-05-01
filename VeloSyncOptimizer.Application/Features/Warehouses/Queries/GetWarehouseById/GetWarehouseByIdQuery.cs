@@ -1,6 +1,6 @@
-﻿using MediatR;
+using MediatR;
 using VeloSyncOptimizer.Application.Features.Warehouses.DTOs;
 
 
-public record GetWarehouseByIdQuery(Guid Id)
-    : IRequest<WarehouseDto?>; 
+public record GetWarehouseByIdQuery(int Id)
+    : IRequest<WarehouseDto?>;

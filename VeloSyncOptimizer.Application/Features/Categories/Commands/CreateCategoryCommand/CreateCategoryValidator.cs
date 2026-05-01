@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 public class CreateCategoryValidator : AbstractValidator<CreateCategoryCommand>
 {
@@ -9,7 +9,7 @@ public class CreateCategoryValidator : AbstractValidator<CreateCategoryCommand>
             .MaximumLength(100).WithMessage("Category name cannot exceed 100 characters");
 
         RuleFor(x => x.ParentId)
-            .Must(id => id == null || id != Guid.Empty)
+            .Must(id => id == null || id > 0)
             .WithMessage("Invalid ParentId");
     }
 }

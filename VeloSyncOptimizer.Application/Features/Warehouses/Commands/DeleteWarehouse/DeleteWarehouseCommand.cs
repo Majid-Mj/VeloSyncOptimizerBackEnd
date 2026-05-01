@@ -1,3 +1,3 @@
-﻿using MediatR;
+using MediatR;
 
-public record DeleteWarehouseCommand(Guid Id) : IRequest<bool>;
+public record DeleteWarehouseCommand(int Id) : IRequest<bool>;

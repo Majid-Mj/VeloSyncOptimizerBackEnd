@@ -1,5 +1,5 @@
-﻿public class UpdateCategoryRequest
+public class UpdateCategoryRequest
 {
     public string? Name { get; set; }
-    public Guid? ParentId { get; set; }
+    public int? ParentId { get; set; }
 }   

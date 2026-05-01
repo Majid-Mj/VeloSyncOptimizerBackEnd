@@ -18,5 +18,5 @@ public record CreateWarehouseCommand(
     decimal? Latitude,
     decimal? Longitude,
     int      TotalCapacity,
-    Guid?    ManagerId
-) : IRequest<Guid>;
+    int?    ManagerId
+) : IRequest<int>;

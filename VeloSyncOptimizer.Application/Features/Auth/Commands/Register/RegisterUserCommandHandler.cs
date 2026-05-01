@@ -7,7 +7,7 @@ using VeloSyncOptimizer.Domain.Entities;
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands.Register;
 
 public class RegisterUserCommandHandler
-    : IRequestHandler<RegisterUserCommand, Guid>
+    : IRequestHandler<RegisterUserCommand, int>
 {
     // ✅ Only interfaces — no AppDbContext, no EF Core, no Infrastructure
     private readonly IUserRepository _userRepo;
@@ -21,7 +21,7 @@ public class RegisterUserCommandHandler
         _password = password;
     }
 
-    public async Task<Guid> Handle(RegisterUserCommand req, CancellationToken ct)
+    public async Task<int> Handle(RegisterUserCommand req, CancellationToken ct)
     {
         // 1. Check duplicate
         var exists = await _userRepo.ExistsByEmailAsync(req.Email, ct);
@@ -35,7 +35,6 @@ public class RegisterUserCommandHandler
 
         var user = new User
         {
-            Id = Guid.NewGuid(),
             Email = req.Email.ToLower().Trim(),
             PasswordHash = _password.Hash(req.Password),
             FirstName = req.FirstName,

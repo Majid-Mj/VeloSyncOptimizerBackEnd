@@ -1,6 +1,6 @@
-﻿using MediatR;
+using MediatR;
 
-public class CreateSupplierCommand : IRequest<Guid>
+public class CreateSupplierCommand : IRequest<int>
 {
     public string Name { get; set; } = default!;
 

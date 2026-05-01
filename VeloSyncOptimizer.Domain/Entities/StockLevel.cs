@@ -14,11 +14,11 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class StockLevel
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
-    public Guid ProductId { get; set; }
+    public int ProductId { get; set; }
 
-    public Guid WarehouseId { get; set; }
+    public int WarehouseId { get; set; }
 
     public int QuantityOnHand { get; set; }
 

@@ -1,6 +1,6 @@
-﻿using MediatR;
+using MediatR;
 
 public class DeleteSupplierCommand : IRequest<bool>
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 }

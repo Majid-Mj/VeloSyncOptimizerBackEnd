@@ -14,16 +14,16 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class WarehouseTransfer
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [StringLength(30)]
     public string TransferNumber { get; set; } = null!;
 
-    public Guid ProductId { get; set; }
+    public int ProductId { get; set; }
 
-    public Guid SourceWarehouseId { get; set; }
+    public int SourceWarehouseId { get; set; }
 
-    public Guid DestWarehouseId { get; set; }
+    public int DestWarehouseId { get; set; }
 
     public int Quantity { get; set; }
 
@@ -33,13 +33,13 @@ public partial class WarehouseTransfer
     [StringLength(500)]
     public string? Notes { get; set; }
 
-    public Guid? InitiatedByUserId { get; set; }
+    public int? InitiatedByUserId { get; set; }
 
     public DateTime? CompletedAt { get; set; }
 
-    public Guid? SourceMovementId { get; set; }
+    public int? SourceMovementId { get; set; }
 
-    public Guid? DestMovementId { get; set; }
+    public int? DestMovementId { get; set; }
 
     public DateTime CreatedAt { get; set; }
 

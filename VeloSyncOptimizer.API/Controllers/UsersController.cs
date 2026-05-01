@@ -30,7 +30,7 @@ public class UsersController : ControllerBase
 
     [Authorize(Roles = "Administrator")]
     [HttpPut("approve/{id}")]
-    public async Task<IActionResult> Approve(Guid id, CancellationToken ct)
+    public async Task<IActionResult> Approve(int id, CancellationToken ct)
     {
         await _mediator.Send(new ApproveUserCommand(id), ct);
         return Ok(ResponseFactory.Success(new { id }, "User approved successfully"));

@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VeloSyncOptimizer.Application.Common.Helpers;
@@ -26,7 +26,7 @@ public class SuppliersController : ControllerBase
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetSupplierById(
-    Guid id,
+    int id,
     CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(
@@ -51,7 +51,7 @@ public class SuppliersController : ControllerBase
     [HttpPut("{id}")]
     [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> UpdateSupplier(
-    Guid id,
+    int id,
     [FromBody] UpdateSupplierRequest request,
     CancellationToken cancellationToken)
     {
@@ -73,7 +73,7 @@ public class SuppliersController : ControllerBase
     [HttpDelete("{id}")]
     [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> DeleteSupplier(
-    Guid id,
+    int id,
     CancellationToken cancellationToken)
     {
         var command = new DeleteSupplierCommand

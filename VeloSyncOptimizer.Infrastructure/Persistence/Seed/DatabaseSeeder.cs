@@ -39,7 +39,6 @@ public static class DatabaseSeeder
         {
             adminUser = new User
             {
-                Id = Guid.NewGuid(),
                 Email = adminEmail,
                 PasswordHash = passwordService.Hash("Admin@123"),
                 FirstName = "System",

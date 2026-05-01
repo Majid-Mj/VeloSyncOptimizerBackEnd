@@ -41,11 +41,10 @@ public class WarehouseRepository : IWarehouseRepository
     /// <summary>
     /// Inserts a new warehouse via EF Core and returns its generated Id.
     /// </summary>
-    public async Task<Guid> CreateAsync(CreateWarehouseCommand command, CancellationToken ct)
+    public async Task<int> CreateAsync(CreateWarehouseCommand command, CancellationToken ct)
     {
         var warehouse = new Warehouse
         {
-            Id = Guid.NewGuid(),
             Code = command.Code,
             Name = command.Name,
             AddressLine1 = command.AddressLine1,
@@ -71,7 +70,7 @@ public class WarehouseRepository : IWarehouseRepository
 
 
 
-    public async Task<WarehouseDto?> GetByIdAsync(Guid id, CancellationToken ct)
+    public async Task<WarehouseDto?> GetByIdAsync(int id, CancellationToken ct)
     {
         using var conn = new SqlConnection(_db.Database.GetConnectionString());
 
@@ -107,7 +106,7 @@ public class WarehouseRepository : IWarehouseRepository
 
 
 
-    public async Task<bool> SoftDeleteAsync(Guid id, CancellationToken ct)
+    public async Task<bool> SoftDeleteAsync(int id, CancellationToken ct)
     {
         using var conn = new SqlConnection(_db.Database.GetConnectionString());
 

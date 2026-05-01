@@ -12,11 +12,11 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class SupplierDelivery
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
-    public Guid PurchaseOrderId { get; set; }
+    public int PurchaseOrderId { get; set; }
 
-    public Guid SupplierId { get; set; }
+    public int SupplierId { get; set; }
 
     public DateOnly PromisedDate { get; set; }
 

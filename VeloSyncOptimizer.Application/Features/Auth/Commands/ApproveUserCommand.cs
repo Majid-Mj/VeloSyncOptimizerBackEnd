@@ -7,4 +7,4 @@ using System.Threading.Tasks;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands;
 
-public record ApproveUserCommand(Guid UserId) : IRequest;
+public record ApproveUserCommand(int UserId) : IRequest;

@@ -11,7 +11,7 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class Warehouse
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [StringLength(20)]
     public string Code { get; set; } = null!;
@@ -42,7 +42,7 @@ public partial class Warehouse
 
     public int TotalCapacity { get; set; }
 
-    public Guid? ManagerId { get; set; }
+    public int? ManagerId { get; set; }
 
     public bool IsActive { get; set; }
 

@@ -4,7 +4,6 @@ using System.Data;
 
 //public interface IGenericRepository<T> where T : class
 //{
-//    Task<T> GetByIdAsync(Guid id, CancellationToken ct);
 //    Task<List<T>> GetAllAsync(CancellationToken ct);
 
 
@@ -22,7 +21,7 @@ using System.Data;
 //}
 public interface IGenericRepository<T> where T : class
 {
-    Task<T?> GetByIdAsync(Guid id, CancellationToken ct);
+    Task<T?> GetByIdAsync(int id, CancellationToken ct);
 
     Task AddAsync(T entity, CancellationToken ct);
 

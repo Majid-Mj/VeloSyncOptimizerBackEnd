@@ -14,14 +14,14 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class PurchaseOrder
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [StringLength(30)]
     public string PONumber { get; set; } = null!;
 
-    public Guid SupplierId { get; set; }
+    public int SupplierId { get; set; }
 
-    public Guid WarehouseId { get; set; }
+    public int WarehouseId { get; set; }
 
     public byte StatusId { get; set; }
 
@@ -30,14 +30,14 @@ public partial class PurchaseOrder
 
     public DateOnly? ExpectedDate { get; set; }
 
-    public Guid? ApprovedByUserId { get; set; }
+    public int? ApprovedByUserId { get; set; }
 
     public DateTime? ApprovedAt { get; set; }
 
     [StringLength(500)]
     public string? Notes { get; set; }
 
-    public Guid? CreatedByUserId { get; set; }
+    public int? CreatedByUserId { get; set; }
 
     public DateTime CreatedAt { get; set; }
 

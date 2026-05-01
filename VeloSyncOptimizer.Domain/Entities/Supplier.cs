@@ -11,7 +11,7 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class Supplier
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [StringLength(200)]
     public string Name { get; set; } = null!;

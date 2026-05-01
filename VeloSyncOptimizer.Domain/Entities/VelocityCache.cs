@@ -12,11 +12,11 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class VelocityCache
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
-    public Guid ProductId { get; set; }
+    public int ProductId { get; set; }
 
-    public Guid WarehouseId { get; set; }
+    public int WarehouseId { get; set; }
 
     [Column(TypeName = "decimal(10, 4)")]
     public decimal AvgDaily30 { get; set; }

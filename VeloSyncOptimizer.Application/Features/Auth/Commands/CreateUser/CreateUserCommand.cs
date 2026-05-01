@@ -8,4 +8,4 @@ public record CreateUserCommand(
     string FirstName,
     string LastName,
     byte RoleId
-) : IRequest<Guid>;
+) : IRequest<int>;

@@ -12,11 +12,11 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class StockMovement
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
-    public Guid ProductId { get; set; }
+    public int ProductId { get; set; }
 
-    public Guid WarehouseId { get; set; }
+    public int WarehouseId { get; set; }
 
     public byte MovementTypeId { get; set; }
 
@@ -32,7 +32,7 @@ public partial class StockMovement
     [StringLength(500)]
     public string? Notes { get; set; }
 
-    public Guid? CreatedByUserId { get; set; }
+    public int? CreatedByUserId { get; set; }
 
     public DateTime CreatedAt { get; set; }
 

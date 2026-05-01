@@ -1,7 +1,7 @@
-﻿using MediatR;
+using MediatR;
 
 public record UpdateWarehouseCommand(
-    Guid Id,
+    int Id,
     string? Code,
     string? Name,
     string? City,

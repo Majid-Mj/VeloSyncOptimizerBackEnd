@@ -8,7 +8,7 @@ namespace VeloSyncOptimizer.Application.Common.Interfaces.Services
 {
     public interface IJwtService
     {
-        string GenerateToken(Guid userId, string roleName);
+        string GenerateToken(int userId, string roleName);
         string GenerateRefreshToken();
     }
 }

@@ -47,7 +47,7 @@ public class WarehousesController : ControllerBase
 
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
+    public async Task<IActionResult> GetById(int id, CancellationToken ct)
     {
         var result = await _mediator.Send(
             new GetWarehouseByIdQuery(id), ct);
@@ -66,7 +66,7 @@ public class WarehousesController : ControllerBase
     [Authorize(Roles = "Administrator")]
     [HttpPatch("{id}")]
     public async Task<IActionResult> Update(
-    Guid id,
+    int id,
     [FromForm] UpdateWarehouseRequestDto dto,
     CancellationToken ct)
     {
@@ -101,7 +101,7 @@ public class WarehousesController : ControllerBase
     [Authorize(Roles = "Administrator")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Replace(
-        Guid id,
+        int id,
         [FromForm] ReplaceWarehouseRequestDto dto,
         CancellationToken ct)
     {
@@ -132,7 +132,7 @@ public class WarehousesController : ControllerBase
 
     [Authorize(Roles = "Administrator")]
     [HttpDelete("{id}")]
-    public async Task<IActionResult> SoftDelete(Guid id, CancellationToken ct)
+    public async Task<IActionResult> SoftDelete(int id, CancellationToken ct)
     {
         var result = await _mediator.Send(
             new DeleteWarehouseCommand(id), ct);

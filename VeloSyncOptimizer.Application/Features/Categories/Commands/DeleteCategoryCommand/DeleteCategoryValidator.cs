@@ -1,10 +1,10 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 public class DeleteCategoryValidator : AbstractValidator<DeleteCategoryCommand>
 {
     public DeleteCategoryValidator()
     {
         RuleFor(x => x.Id)
-            .NotEmpty().WithMessage("Category Id is required");
+            .GreaterThan(0).WithMessage("Category Id is required");
     }
 }

@@ -1,7 +1,7 @@
-﻿using MediatR;
+using MediatR;
 
-public class CreateCategoryCommand : IRequest<Guid>
+public class CreateCategoryCommand : IRequest<int>
 {
     public string Name { get; set; } = default!;
-    public Guid? ParentId { get; set; }
+    public int? ParentId { get; set; }
 }

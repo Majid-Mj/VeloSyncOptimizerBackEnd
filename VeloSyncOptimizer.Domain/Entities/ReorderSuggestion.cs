@@ -12,11 +12,11 @@ namespace VeloSyncOptimizer.Domain.Entities;
 public partial class ReorderSuggestion
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
-    public Guid ProductId { get; set; }
+    public int ProductId { get; set; }
 
-    public Guid WarehouseId { get; set; }
+    public int WarehouseId { get; set; }
 
     public byte SeverityId { get; set; }
 
@@ -37,7 +37,7 @@ public partial class ReorderSuggestion
 
     public DateTime? ActionedAt { get; set; }
 
-    public Guid? PurchaseOrderId { get; set; }
+    public int? PurchaseOrderId { get; set; }
 
     public DateTime GeneratedAt { get; set; }
 
