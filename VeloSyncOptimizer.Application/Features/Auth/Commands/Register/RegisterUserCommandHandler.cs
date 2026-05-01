@@ -41,7 +41,7 @@ public class RegisterUserCommandHandler
             LastName = req.LastName,
             RoleId = (byte)req.RoleId,        
             IsActive = true,
-            IsApproved = false          // 🔥 KEY CHANGE
+            IsApproved = false          
         };
 
         var newId = await _userRepo.CreateAsync(user, ct);

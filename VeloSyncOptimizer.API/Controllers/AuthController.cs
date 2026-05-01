@@ -7,6 +7,8 @@ using VeloSyncOptimizer.Application.Features.Auth.Commands.Register;
 
 
 
+using VeloSyncOptimizer.Application.Features.Auth.DTOs;
+
 namespace VeloSyncOptimizer.API.Controllers;
 
 [ApiController]
@@ -24,8 +26,16 @@ public class AuthController : ControllerBase
     [AllowAnonymous]
     [HttpPost("register")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Register([FromForm] RegisterUserCommand command)
+    public async Task<IActionResult> Register([FromForm] RegisterRequestDto dto)
     {
+        var command = new RegisterUserCommand(
+            dto.Email,
+            dto.Password,
+            dto.FirstName,
+            dto.LastName,
+            dto.RoleId
+        );
+
         var id = await _mediator.Send(command);
 
         return Ok(ResponseFactory.Success(new { UserId = id }, "User registered"));
