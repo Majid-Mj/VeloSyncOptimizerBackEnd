@@ -34,5 +34,19 @@ public class ProductsController : ControllerBase
     }
 
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetProductById(
+    int id,
+    CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(
+            new GetProductByIdQuery { Id = id },
+            cancellationToken);
+
+        if (result == null)
+            return NotFound("Product not found");
+
+        return Ok(ResponseFactory.Success(result, "Product fetched successfully"));
+    }
 
 }
