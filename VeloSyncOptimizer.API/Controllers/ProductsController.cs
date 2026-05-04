@@ -49,4 +49,17 @@ public class ProductsController : ControllerBase
         return Ok(ResponseFactory.Success(result, "Product fetched successfully"));
     }
 
+
+    [HttpGet("{id}/stock")]
+    public async Task<IActionResult> GetProductStock(
+    int id,
+    CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(
+            new GetProductStockQuery { ProductId = id },
+            cancellationToken);
+
+        return Ok(ResponseFactory.Success(result, "Stock fetched successfully"));
+    }
+
 }
