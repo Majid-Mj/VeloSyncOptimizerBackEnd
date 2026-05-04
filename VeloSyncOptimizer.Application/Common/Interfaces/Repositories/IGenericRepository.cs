@@ -1,4 +1,5 @@
 using System.Data;
+using System.Linq.Expressions;
 
 //namespace VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 
@@ -30,6 +31,8 @@ public interface IGenericRepository<T> where T : class
     void Remove(T entity);
 
     Task<int> SaveChangesAsync(CancellationToken ct);
+
+    Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate, CancellationToken ct);
 }
 
 

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using VeloSyncOptimizer.Infrastructure.Persistence.Context;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
@@ -34,4 +35,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         return _db.SaveChangesAsync(ct);
     }
+
+    public async Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate, CancellationToken ct)
+        => await _db.Set<T>().AnyAsync(predicate, ct);
 }

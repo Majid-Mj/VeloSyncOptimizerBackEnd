@@ -59,7 +59,19 @@ public class ProductsController : ControllerBase
             new GetProductStockQuery { ProductId = id },
             cancellationToken);
 
-        return Ok(ResponseFactory.Success(result, "Stock fetched successfully"));
+        return Ok(ResponseFactory.Success(result, "Stock fetched successfully"));   
+    }
+
+
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> CreateProduct(
+    CreateProductCommand command,
+    CancellationToken cancellationToken)
+    {
+        var id = await _mediator.Send(command, cancellationToken);
+
+        return Ok(ResponseFactory.Success(id, "Product created successfully"));
     }
 
 }
