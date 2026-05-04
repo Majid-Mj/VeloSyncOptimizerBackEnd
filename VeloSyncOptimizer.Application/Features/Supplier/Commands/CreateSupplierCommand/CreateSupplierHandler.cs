@@ -7,28 +7,22 @@ public class CreateSupplierHandler
     : IRequestHandler<CreateSupplierCommand, int>
 {
     private readonly IGenericRepository<Supplier> _repo;
-    private readonly ICategoryRepository _queryRepo; // Dapper (for duplicate check)
     private readonly ICacheService _cache;
 
     public CreateSupplierHandler(
         IGenericRepository<Supplier> repo,
-        ICategoryRepository queryRepo,
         ICacheService cache)
     {
         _repo = repo;
-        _queryRepo = queryRepo;
         _cache = cache;
     }
 
     public async Task<int> Handle(CreateSupplierCommand request, CancellationToken ct)
     {
         // Duplicate check (by Name)
-        var existing = (await _queryRepo.QueryAsync<Supplier>(
-            "inventory.sp_CheckSupplierExists",
-            new { request.Name }))
-            .FirstOrDefault();
+        var exists = await _repo.ExistsAsync(s => s.Name == request.Name.Trim(), ct);
 
-        if (existing != null)
+        if (exists)
             throw new Exception("Supplier with this name already exists");
 
         // Create entity
@@ -38,6 +32,7 @@ public class CreateSupplierHandler
             ContactEmail = request.ContactEmail,
             ContactPhone = request.ContactPhone,
             CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
             IsActive = true
         };
 

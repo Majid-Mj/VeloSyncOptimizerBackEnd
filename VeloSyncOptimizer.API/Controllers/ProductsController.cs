@@ -64,7 +64,7 @@ public class ProductsController : ControllerBase
 
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> CreateProduct(
     CreateProductCommand command,
     CancellationToken cancellationToken)
