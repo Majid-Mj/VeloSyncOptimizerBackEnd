@@ -33,7 +33,7 @@ public class AuthController : ControllerBase
             dto.Password,
             dto.FirstName,
             dto.LastName,
-            dto.RoleId
+            dto.Role
         );
 
         var id = await _mediator.Send(command);

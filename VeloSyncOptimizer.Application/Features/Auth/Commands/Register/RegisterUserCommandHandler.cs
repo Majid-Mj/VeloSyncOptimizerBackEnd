@@ -3,6 +3,7 @@ using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 using VeloSyncOptimizer.Domain.Entities;
+using VeloSyncOptimizer.Domain.Enums;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands.Register;
 
@@ -32,16 +33,17 @@ public class RegisterUserCommandHandler
             throw new InvalidOperationException($"Email '{email}' is already registered");
 
 
-        if (req.RoleId != 2 && req.RoleId != 3)
-            throw new Exception("Invalid role selected");
-
+        // Removed manual role checks as Enum handles it
+        if (req.Role == UserRoleEnum.Administrator)
+            throw new InvalidOperationException("Registration as Administrator is not allowed.");
+        
         var user = new User
         {
             Email = email,
             PasswordHash = _password.Hash(req.Password),
             FirstName = req.FirstName,
             LastName = req.LastName,
-            RoleId = (byte)req.RoleId,        
+            RoleId = (byte)req.Role,        
             IsActive = true,
             IsApproved = false          
         };

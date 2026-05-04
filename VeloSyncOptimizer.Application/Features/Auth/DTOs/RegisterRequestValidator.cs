@@ -1,5 +1,6 @@
 using FluentValidation;
 using VeloSyncOptimizer.Application.Features.Auth.DTOs;
+using VeloSyncOptimizer.Domain.Enums;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.DTOs;
 
@@ -11,6 +12,6 @@ public class RegisterRequestValidator : AbstractValidator<RegisterRequestDto>
         RuleFor(v => v.Password).NotEmpty().MinimumLength(6);
         RuleFor(v => v.FirstName).NotEmpty();
         RuleFor(v => v.LastName).NotEmpty();
-        RuleFor(v => v.RoleId).GreaterThan(0);
+        RuleFor(v => v.Role).IsInEnum();
     }
 }

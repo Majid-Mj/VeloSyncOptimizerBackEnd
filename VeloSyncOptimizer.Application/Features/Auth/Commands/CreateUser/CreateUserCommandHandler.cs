@@ -2,6 +2,7 @@ using MediatR;
 using VeloSyncOptimizer.Application.Common.Interfaces.Repositories;
 using VeloSyncOptimizer.Application.Common.Interfaces.Services;
 using VeloSyncOptimizer.Domain.Entities;
+using VeloSyncOptimizer.Domain.Enums;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
 
@@ -33,7 +34,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
             PasswordHash = _password.Hash(req.Password),
             FirstName = req.FirstName,
             LastName = req.LastName,
-            RoleId = req.RoleId, 
+            RoleId = (byte)req.Role, 
             IsActive = true,
             IsApproved = true
         };

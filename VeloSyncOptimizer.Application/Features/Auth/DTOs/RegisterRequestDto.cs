@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using VeloSyncOptimizer.Domain.Enums;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.DTOs;
 
@@ -49,6 +50,5 @@ public class RegisterRequestDto
     public string ConfirmPassword { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Role is required")]
-    [Range(1, 10, ErrorMessage = "Invalid Role selected")]
-    public int RoleId { get; set; }
+    public UserRoleEnum Role { get; set; }
 }

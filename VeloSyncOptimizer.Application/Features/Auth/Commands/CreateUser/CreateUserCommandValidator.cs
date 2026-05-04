@@ -1,4 +1,5 @@
 using FluentValidation;
+using VeloSyncOptimizer.Domain.Enums;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
 
@@ -10,6 +11,6 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
         RuleFor(v => v.Password).NotEmpty().MinimumLength(6);
         RuleFor(v => v.FirstName).NotEmpty();
         RuleFor(v => v.LastName).NotEmpty();
-        RuleFor(v => v.RoleId).NotEmpty();
+        RuleFor(v => v.Role).IsInEnum();
     }
 }

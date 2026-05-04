@@ -1,4 +1,5 @@
 using MediatR;
+using VeloSyncOptimizer.Domain.Enums;
 
 namespace VeloSyncOptimizer.Application.Features.Auth.Commands.CreateUser;
 
@@ -8,14 +9,14 @@ public record CreateUserCommand : IRequest<int>
     public string Password { get; init; }
     public string FirstName { get; init; }
     public string LastName { get; init; }
-    public byte RoleId { get; init; }
+    public UserRoleEnum Role { get; init; }
 
-    public CreateUserCommand(string email, string password, string firstName, string lastName, byte roleId)
+    public CreateUserCommand(string email, string password, string firstName, string lastName, UserRoleEnum role)
     {
         Email = email?.Trim() ?? string.Empty;
         Password = password;
         FirstName = firstName;
         LastName = lastName;
-        RoleId = roleId;
+        Role = role;
     }
 }

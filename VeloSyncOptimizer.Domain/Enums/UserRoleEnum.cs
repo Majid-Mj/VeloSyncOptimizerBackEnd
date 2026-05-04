@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace VeloSyncOptimizer.Domain.Enums;
 
-public enum UserRoleEnum : byte
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum UserRoleEnum
 {
     Administrator = 1,
     WarehouseManager = 2,
-    ProcurementOfficer = 3
+    ProcurementManager = 3
 }
