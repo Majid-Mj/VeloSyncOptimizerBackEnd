@@ -27,7 +27,12 @@ public class RegisterRequestDto
     [RegularExpression(
         @"^[a-zA-Z0-9][a-zA-Z0-9._%+\-]*@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$",
         ErrorMessage = "Invalid email format")]
-    public string Email { get; set; } = string.Empty;
+    private string _email = string.Empty;
+    public string Email 
+    { 
+        get => _email; 
+        set => _email = value?.Trim() ?? string.Empty; 
+    }
 
     // ── PASSWORD ────────────────────────────────────────────
     [Required(ErrorMessage = "Password is required")]

@@ -28,7 +28,7 @@ public class LoginUserCommandHandler
         LoginUserCommand req, CancellationToken ct)
     {
         // 1. Fetch user via interface — Dapper runs behind the scenes
-        var user = await _userRepo.GetByEmailAsync(req.Email, ct);
+        var user = await _userRepo.GetByEmailAsync(req.Email.ToLower(), ct);
 
         // 2. Validate credentials
         if (user is null || !_password.Verify(req.Password, user.PasswordHash))

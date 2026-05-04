@@ -23,11 +23,13 @@ public class RegisterUserCommandHandler
 
     public async Task<int> Handle(RegisterUserCommand req, CancellationToken ct)
     {
+        var email = req.Email.ToLower();
+
         // 1. Check duplicate
-        var exists = await _userRepo.ExistsByEmailAsync(req.Email, ct);
+        var exists = await _userRepo.ExistsByEmailAsync(email, ct);
 
         if (exists)
-            throw new InvalidOperationException($"Email '{req.Email}' is already registered");
+            throw new InvalidOperationException($"Email '{email}' is already registered");
 
 
         if (req.RoleId != 2 && req.RoleId != 3)
@@ -35,7 +37,7 @@ public class RegisterUserCommandHandler
 
         var user = new User
         {
-            Email = req.Email.ToLower().Trim(),
+            Email = email,
             PasswordHash = _password.Hash(req.Password),
             FirstName = req.FirstName,
             LastName = req.LastName,

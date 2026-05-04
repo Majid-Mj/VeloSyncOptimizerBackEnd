@@ -20,14 +20,16 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
 
     public async Task<int> Handle(CreateUserCommand req, CancellationToken ct)
     {
-        var exists = await _userRepo.ExistsByEmailAsync(req.Email, ct);
+        var email = req.Email.ToLower();
+
+        var exists = await _userRepo.ExistsByEmailAsync(email, ct);
 
         if (exists)
-            throw new InvalidOperationException($"Email '{req.Email}' is already registered");
+            throw new InvalidOperationException($"Email '{email}' is already registered");
 
         var user = new User
         {
-            Email = req.Email.ToLower().Trim(),
+            Email = email,
             PasswordHash = _password.Hash(req.Password),
             FirstName = req.FirstName,
             LastName = req.LastName,
