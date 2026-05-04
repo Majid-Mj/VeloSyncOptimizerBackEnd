@@ -60,7 +60,7 @@ public class LoginUserCommandHandler
         // 5. Return response DTO
         return new AuthResponseDto
         {
-            Token = accessToken,
+            AccessToken = accessToken,
             RefreshToken = refreshToken,
             RoleId = user.RoleId,
             Expiry = DateTime.UtcNow.AddHours(2)

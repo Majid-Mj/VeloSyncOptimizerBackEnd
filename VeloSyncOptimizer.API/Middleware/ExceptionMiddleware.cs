@@ -24,7 +24,8 @@ public class ExceptionMiddleware
                     context.Response.ContentType = "application/json";
                     var response = new ApiResponse<object>
                     {
-                        Success = false,
+                        IsSuccess = false,
+                        StatusCode = 401,
                         Message = "Unauthorized: You must be logged in to access this resource.",
                         Data = null,
                         Errors = new List<string> { "Authentication token is missing or invalid." }
@@ -36,7 +37,8 @@ public class ExceptionMiddleware
                     context.Response.ContentType = "application/json";
                     var response = new ApiResponse<object>
                     {
-                        Success = false,
+                        IsSuccess = false,
+                        StatusCode = 403,
                         Message = "Forbidden: You do not have permission to perform this action.",
                         Data = null,
                         Errors = new List<string> { "Access denied. Required role not present in token." }
@@ -51,7 +53,8 @@ public class ExceptionMiddleware
             context.Response.ContentType = "application/json";
             var response = new ApiResponse<object>
             {
-                Success = false,
+                IsSuccess = false,
+                StatusCode = 401,
                 Message = "Unauthorized",
                 Data = null,
                 Errors = new List<string> { ex.Message }
@@ -67,7 +70,8 @@ public class ExceptionMiddleware
 
             var response = new ApiResponse<object>
             {
-                Success = false,
+                IsSuccess = false,
+                StatusCode = 500,
                 Message = "An error occurred",
                 Data = null,
                 Errors = new List<string> { errorMessage }

@@ -65,7 +65,7 @@ if (app.Environment.IsDevelopment())
                         if (url && url.includes('/api/auth/login') && response.ok) {
                             const clone = response.clone();
                             clone.json().then(json => {
-                                const token = json.data?.token;
+                                const token = json.data?.accessToken;
                                 if (token && window.ui) {
                                     window.ui.authActions.authorize({
                                         Bearer: {

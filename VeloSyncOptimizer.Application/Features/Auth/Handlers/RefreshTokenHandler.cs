@@ -52,7 +52,7 @@ public class RefreshTokenHandler
 
         return new AuthResponseDto
         {
-            Token = newAccessToken,
+            AccessToken = newAccessToken,
             RefreshToken = newRefreshToken,
             RoleId = user.RoleId,
             Expiry = DateTime.UtcNow.AddMinutes(30)

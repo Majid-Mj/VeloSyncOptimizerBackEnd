@@ -56,7 +56,7 @@ public class AuthController : ControllerBase
             Expires = DateTime.UtcNow.AddHours(2)
         };
 
-        Response.Cookies.Append("AccessToken", result.Token, cookieOptions);
+        Response.Cookies.Append("AccessToken", result.AccessToken, cookieOptions);
 
         var refreshCookieOptions = new CookieOptions
         {
@@ -122,7 +122,7 @@ public class AuthController : ControllerBase
             SameSite = SameSiteMode.Strict,
             Expires = DateTime.UtcNow.AddHours(2)
         };
-        Response.Cookies.Append("AccessToken", result.Token, cookieOptions);
+        Response.Cookies.Append("AccessToken", result.AccessToken, cookieOptions);
 
         var refreshCookieOptions = new CookieOptions
         {

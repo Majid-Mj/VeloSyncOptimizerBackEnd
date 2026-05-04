@@ -9,31 +9,34 @@ namespace VeloSyncOptimizer.Application.Common.Helpers;
 
 public static class ResponseFactory
 {
-    public static ApiResponse<T> Success<T>(T data, string message = "Success")
+    public static ApiResponse<T> Success<T>(T data, string message = "Success", int statusCode = 200)
     {
         return new ApiResponse<T>
         {
-            Success = true,
+            IsSuccess = true,
+            StatusCode = statusCode,
             Message = message,
             Data = data
         };
     }
 
-    public static ApiResponse<T> Failure<T>(string message, List<string>? errors = null)
+    public static ApiResponse<T> Failure<T>(string message, List<string>? errors = null, int statusCode = 400)
     {
         return new ApiResponse<T>
         {
-            Success = false,
+            IsSuccess = false,
+            StatusCode = statusCode,
             Message = message,
             Errors = errors ?? new List<string>()
         };
     }
 
-    public static ApiResponse<object> Error(string message, List<string>? errors = null)
+    public static ApiResponse<object> Error(string message, List<string>? errors = null, int statusCode = 500)
     {
         return new ApiResponse<object>
         {
-            Success = false,
+            IsSuccess = false,
+            StatusCode = statusCode,
             Message = message,
             Errors = errors ?? new List<string>(),
             Data = null
