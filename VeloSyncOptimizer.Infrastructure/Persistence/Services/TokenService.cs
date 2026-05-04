@@ -18,8 +18,8 @@ public class TokenService : ITokenService
         _jwt = jwt;
     }
 
-    public string GenerateAccessToken(int userId, string roleName)
-        => _jwt.GenerateToken(userId, roleName);
+    public string GenerateAccessToken(int userId, string email, string roleName, int roleId)
+        => _jwt.GenerateToken(userId, email, roleName, roleId);
 
     public string GenerateRefreshToken()
     {

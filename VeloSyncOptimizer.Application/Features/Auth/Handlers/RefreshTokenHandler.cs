@@ -34,7 +34,7 @@ public class RefreshTokenHandler
             throw new Exception("User not found");
 
         // 🔥 Generate new JWT
-        var newAccessToken = _jwtService.GenerateToken(user.Id, user.RoleName);
+        var newAccessToken = _jwtService.GenerateToken(user.Id, user.Email, user.RoleName, user.RoleId);
 
         // 🔥 Rotate refresh token (recommended)
         storedToken.IsRevoked = true;

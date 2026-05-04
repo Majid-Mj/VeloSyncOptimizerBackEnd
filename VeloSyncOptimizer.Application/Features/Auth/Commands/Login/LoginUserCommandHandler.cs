@@ -40,7 +40,9 @@ public class LoginUserCommandHandler
         // 3. Generate JWT via interface
         var accessToken = _jwt.GenerateToken(
             user.Id,
-            user.RoleName
+            user.Email,
+            user.RoleName,
+            user.RoleId
         );
 
         var refreshToken = _jwt.GenerateRefreshToken();
